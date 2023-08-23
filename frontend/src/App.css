@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 .App {
-  background-color: aliceblue;
+  background-color: #08050A;
+  color: #FFFFFF;
   height: 100%;
   width: 100%;
+  font-family: 'Space Mono', monospace;
+}
+
+.App h1 {
+  text-align: center;
 }

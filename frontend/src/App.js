@@ -7,14 +7,14 @@ import Marketplace from "./components/Pages/Marketplace/Marketplace";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/marketplace" element={<Marketplace />}></Route>
-      </Routes>
-    </div>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/marketplace" element={<Marketplace />}></Route>
+        </Routes>
+      </div>
   );
 }
 
