@@ -41,7 +41,7 @@ export default function ProductTile(productInfo) {
             sx={{ 
                 bgcolor: '#4800C6',
                 fontWeight: 'bold',
-                ":hover": {
+                "&:hover": {
                     bgcolor: "#7331e8"
                 }
             }}
