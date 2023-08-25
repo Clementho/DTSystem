@@ -5,6 +5,7 @@ import SearchBar from "../../SearchBar";
 import SortOptionsBar from "../../SortOptionsBar";
 import CollapsedFilterBar from "../../CollapsedFilterBar";
 import ExpandedFilterBar from "../../ExpandedFilterBar";
+import { Carousel } from "./Carousel/Carousel.jsx";
 
 import products from "../../../data/products.json";
 
@@ -13,17 +14,29 @@ const Marketplace = () => {
 
   return (
     <>
-      {/* <Carousel /> */}
+      <div
+        style={{
+          width: "100%",
+          backgroundColor: "#011C25",
+        }}
+      >
+        <Grid
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            display: {
+              xs: "none",
+              sm: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          }}
+        >
+          <Carousel />
+        </Grid>
+      </div>
 
       <h1>Marketplace</h1>
-
-      {/* JUST TESTING SO FEEL FREE TO CHANGE */}
-
-      {/* xs, extra-small: 0px
-    sm, small: 600px
-    md, medium: 900px
-    lg, large: 1200px
-    xl, extra-large: 1536px */}
 
       <Box
         sx={{
@@ -65,6 +78,18 @@ const Marketplace = () => {
 };
 
 export default Marketplace;
+
+{
+  /* JUST TESTING SO FEEL FREE TO CHANGE */
+}
+
+{
+  /* xs, extra-small: 0px
+    sm, small: 600px
+    md, medium: 900px
+    lg, large: 1200px
+    xl, extra-large: 1536px */
+}
 
 {
   /* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 9, md: 12, lg: 15 }}>
