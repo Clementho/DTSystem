@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 import SearchBar from "../SearchBar";
 
-const pages = ["Marketplace", "About"];
+const pages = ["Marketplace", "About", "EditProfile"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,7 +35,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#11001c" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#190029", padding: "10px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -48,7 +48,7 @@ function ResponsiveAppBar() {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: "700",
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
@@ -131,6 +131,10 @@ function ResponsiveAppBar() {
                     my: 2,
                     color: "white",
                     display: "block",
+                    fontFamily: "Space Mono",
+                    fontWeight: 700,
+                    letterSpacing: ".1rem",
+                    margin: "0px 10px",
                   }}
                 >
                   {page}

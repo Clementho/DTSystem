@@ -26,7 +26,7 @@ const Marketplace = () => {
     <Box sx={{flexGrow: 1, width: "95%", margin: "auto", display: "flex", columnGap: "20px"}}> 
     
 
-      { expandFilter && <ExpandedFilterBar setExpandFilter={setExpandFilter}/> }
+      { expandFilter && <ExpandedFilterBar expandFilter={expandFilter} setExpandFilter={setExpandFilter}/> }
 
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 9, md: 12, lg: 20 }}>
         

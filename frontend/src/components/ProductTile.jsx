@@ -31,8 +31,9 @@ export default function ProductTile(productInfo) {
           <Box display="flex" alignItems="center">
             <img src={"resources/eth-logo-coloured.png"} alt="Currency" style={{ width: 20, height: 30, marginRight: 4 }} />
             <Typography variant="subtitle2" color='#FFFFFF' fontSize="1.2em">
-              {productPrice} ETH
+              {productPrice}
             </Typography>
+            <Typography marginLeft="3px" variant="subtitle2" color='#FFFFFF' fontSize="0.9em">ETH</Typography>
           </Box>
 
           <Button 
