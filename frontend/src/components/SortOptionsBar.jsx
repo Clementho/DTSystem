@@ -49,7 +49,10 @@ export default function SortOptionsBar() {
           defaultValue={sortOptions[0]}
           sx={{
             bgcolor: "#1B151F",
-            color: "#FFFFFF"
+            color: "#FFFFFF",
+            "& .MuiSelect-icon": {
+              color: "#FFFFFF",
+            },
           }}
         >
             {sortOptions.map((option) => (

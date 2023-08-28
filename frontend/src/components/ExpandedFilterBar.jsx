@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 
 //https://mui.com/material-ui/react-accordion/
 
-export default function ExpandedFilterBar({setExpandFilter}) {
+export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
 
     const propertiesList = [
         "Clothes",
@@ -48,9 +48,11 @@ export default function ExpandedFilterBar({setExpandFilter}) {
             <FormGroup>
                 <FormControlLabel control={
                     <Checkbox sx={{
-                        "&.Mui-checked": {
-                            color: "#4800C6"
-                        }
+                        color: "#8E8894",
+                        "& .Mui-checked": {
+                            color: "#4800C6",
+                            bgcolor: "#FFFFFF"
+                        },
                     }}/>
                 } label="Label 1" />
                 <FormControlLabel control={<Checkbox />} label="Label 2" />
@@ -65,6 +67,12 @@ export default function ExpandedFilterBar({setExpandFilter}) {
 
 
   return (
+    // <CSSTransition
+    //     in={expandFilter}
+    //     timeout={300}
+    //     classNames="expandFilter-transition"
+    //     unmountOnExit
+    // >
     <Box sx={{width: "30%", padding: "10px",  paddingBottom:"50px", bgcolor: "#1B151F", height: "fit-content"}}>
         <Box display="flex" alignItems="center" position="relative" justifyContent="center">
         <Button
@@ -113,10 +121,14 @@ export default function ExpandedFilterBar({setExpandFilter}) {
                 sx={{
                     "& .MuiInputLabel-root": {color: "#8E8894"}, //styles the label
                     "& .MuiOutlinedInput-root": {
-                      "& > fieldset": { 
+                        "& > fieldset": { 
                             borderColor: "#8E8894",
                             borderRadius: "10px",
                             backgroundColor: "transparent"
+                        },
+                        "&:hover fieldset": {
+                            borderWidth: "2px",
+                            borderColor: "#FFFFFF",
                         },
                     },
                     "& .MuiInputBase-input": { //Styles the base input component itself
@@ -139,6 +151,10 @@ export default function ExpandedFilterBar({setExpandFilter}) {
                             borderRadius: "10px",
                             backgroundColor: "transparent"
                         },
+                      "&:hover fieldset": {
+                            borderWidth: "2px",
+                            borderColor: "#FFFFFF",
+                        },
                     },
                     "& .MuiInputBase-input": { //Styles the base input component itself
                         color: "#8E8894",
@@ -155,5 +171,6 @@ export default function ExpandedFilterBar({setExpandFilter}) {
             {accordions}
         </Box>
     </Box>
+    // </CSSTransition>
   );
 }
