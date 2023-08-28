@@ -57,7 +57,7 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
 
-          <SearchBar placeholder="Search assets, collections and accounts"/>
+          <SearchBar placeholder="Search assets, collections and accounts" />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -141,9 +141,12 @@ function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Profile">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              {/* TODO CHANGE THIS ASWELL */}
+              <NavLink to={"/User"} style={{ textDecoration: "none" }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </NavLink>
             </Tooltip>
           </Box>
         </Toolbar>
