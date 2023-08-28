@@ -5,6 +5,7 @@ import About from "./components/Pages/About/About";
 import Home from "./components/Pages/Home/Home";
 import Marketplace from "./components/Pages/Marketplace/Marketplace";
 import User from "./components/Pages/User/UserPage";
+import EditProfile from "./components/Pages/User/EditProfile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/marketplace" element={<Marketplace />}></Route>
         {/* TODO CHANGE THIS LATER */}
         <Route path="/user" element={<User />}></Route>
+        <Route path="/editprofile" element={<EditProfile />}></Route>
       </Routes>
     </div>
   );
