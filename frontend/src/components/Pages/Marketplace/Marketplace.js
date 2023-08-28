@@ -1,27 +1,56 @@
 import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
-
 import ProductTile from "../../ProductTile";
 import SearchBar from "../../SearchBar";
 import SortOptionsBar from "../../SortOptionsBar";
 import CollapsedFilterBar from "../../CollapsedFilterBar";
 import ExpandedFilterBar from "../../ExpandedFilterBar";
+import { Carousel } from "./Carousel/Carousel.jsx";
+
+import products from "../../../data/products.json";
+
 
 const Marketplace = () => {
-
-  const [expandFilter, setExpandFilter] = useState(true)
+  const [expandFilter, setExpandFilter] = useState(false);
 
   return (
     <>
-    <h1>Marketplace</h1>
+      <div
+        style={{
+          width: "100%",
+          backgroundColor: "#011C25",
+        }}
+      >
+        <Grid
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            display: {
+              xs: "none",
+              sm: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          }}
+        >
+          <Carousel />
+        </Grid>
+      </div>
 
-    {/* JUST TESTING SO FEEL FREE TO CHANGE */}
+      <h1>Marketplace</h1>
 
-    {/* xs, extra-small: 0px
-    sm, small: 600px
-    md, medium: 900px
-    lg, large: 1200px
-    xl, extra-large: 1536px */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          width: "95%",
+          margin: "auto",
+          display: "flex",
+          columnGap: "20px",
+        }}
+      >
+        {expandFilter && (
+          <ExpandedFilterBar setExpandFilter={setExpandFilter} />
+        )}
 
     <Box sx={{flexGrow: 1, width: "95%", margin: "auto", display: "flex", columnGap: "20px"}}> 
     
@@ -44,32 +73,18 @@ const Marketplace = () => {
               <SortOptionsBar />
             </Box>
           </Grid>
-        
-    
-          
-          {Array.from(Array(10)).map((product, index) => (
-            // Dynamically adjust each product tile's size within the grid system if filter bar is expanded/collapsed
-            <Grid item xs={2} sm={3} md={3} lg={ expandFilter ? 5 : 4 } key={index}> 
-              <ProductTile
-                productImage={`/resources/asset-${index+1}.jpg`}
-                productName={`asset-${index+1}`}
-                collectionName="avaeva"
-                productPrice="002.3"
-                productLink=""
-              />
+
+          {products.map((product, index) => (
+            <Grid item xs={2} sm={3} key={index}>
+              <ProductTile key={product.id} product={product} />
             </Grid>
           ))}
-      </Grid>
-
-
-    
-
-    
-
-
-    </Box>
+        </Grid>
+      </Box>
     </>
   );
 };
 
 export default Marketplace;
+
+

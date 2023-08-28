@@ -6,6 +6,8 @@ import Home from "./components/Pages/Home/Home";
 import Marketplace from "./components/Pages/Marketplace/Marketplace";
 import User from "./components/Pages/User/UserPage";
 import EditProfile from "./components/Pages/User/EditProfile";
+import ProductDetails from "./components/Pages/ProductDetails/ProductDetails";
+
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         {/* TODO CHANGE THIS LATER */}
         <Route path="/user" element={<User />}></Route>
         <Route path="/editprofile" element={<EditProfile />}></Route>
+        <Route path="/marketplace/:id" element={<ProductDetails />}></Route>
+
       </Routes>
     </div>
   );
