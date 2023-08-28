@@ -11,7 +11,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 
 import "./NavBar.css";
@@ -38,25 +37,14 @@ function ResponsiveAppBar() {
     <AppBar position="static" sx={{ backgroundColor: "#11001c" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
+          <NavLink to={"/"} style={{ textDecoration: "none" }}>
+            <img
+              alt="logo"
+              style={{ width: "108px", height: "54px" }}
+              src="/resources/logo.png"
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
+          </NavLink>
           <SearchBar placeholder="Search assets, collections and accounts" />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -88,8 +76,8 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
                   <NavLink
                     to={"/" + page}
                     style={{ textDecoration: "none", color: "black" }}
@@ -100,33 +88,13 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <NavLink to={"/"} style={{ textDecoration: "none" }}>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              LOGO
-            </Typography>
-          </NavLink>
 
           {/* NAV HERE */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <NavLink to={"/" + page} style={{ textDecoration: "none" }}>
                 <Button
-                  key={page}
+                  key={index}
                   sx={{
                     my: 2,
                     color: "white",
@@ -144,7 +112,7 @@ function ResponsiveAppBar() {
               {/* TODO CHANGE THIS ASWELL */}
               <NavLink to={"/User"} style={{ textDecoration: "none" }}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar src="/resources/profile-image.png" />
                 </IconButton>
               </NavLink>
             </Tooltip>

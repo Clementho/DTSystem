@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "productName": "asset-1",
+    "collectionName": "avaeva",
+    "productPrice": "0.50"
+  },
+  {
+    "id": 2,
+    "productName": "asset-2",
+    "collectionName": "avaeva",
+    "productPrice": "0.15"
+  },
+
+  {
+    "id": 3,
+    "productName": "asset-3",
+    "collectionName": "avaeva",
+    "productPrice": "2.30"
+  },
+  {
+    "id": 4,
+    "productName": "asset-4",
+    "collectionName": "avaeva",
+    "productPrice": "0.35"
+  },
+  {
+    "id": 5,
+    "productName": "asset-5",
+    "collectionName": "avaeva",
+    "productPrice": "10.01"
+  },
+  {
+    "id": 6,
+    "productName": "asset-6",
+    "collectionName": "avaeva",
+    "productPrice": "0.05"
+  },
+  {
+    "id": 7,
+    "productName": "asset-7",
+    "collectionName": "avaeva",
+    "productPrice": "2.80"
+  },
+  {
+    "id": 8,
+    "productName": "asset-8",
+    "collectionName": "avaeva",
+    "productPrice": "0.80"
+  },
+  {
+    "id": 9,
+    "productName": "asset-9",
+    "collectionName": "avaeva",
+    "productPrice": "5.50"
+  },
+  {
+    "id": 10,
+    "productName": "asset-10",
+    "collectionName": "avaeva",
+    "productPrice": "0.01"
+  }
+]
