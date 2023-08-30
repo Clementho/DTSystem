@@ -20,9 +20,9 @@ export default function ColorTabs() {
         indicatorColor="secondary"
         aria-label="secondary tabs example"
       >
-        <Tab value="one" label="Item One" />
-        <Tab value="two" label="Item Two" />
-        <Tab value="three" label="Item Three" />
+        <Tab value="one" label="Overview" />
+        <Tab value="two" label="History" />
+        <Tab value="three" label="Properties" />
       </Tabs>
     </Box>
   );
