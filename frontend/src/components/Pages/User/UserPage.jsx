@@ -1,6 +1,6 @@
 import React from "react"; 
 import StickyHeadTable from "./Table/Table";
-import { Box, Grid, TextField, Avatar, IconButton, Divider, Typography, Button} from "@mui/material";
+import { Box, Grid, TextField, Avatar, IconButton, Divider, Typography} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 
 const User = () =>  { 
@@ -41,11 +41,6 @@ const User = () =>  {
                                 }}
                             />
                         </IconButton>
-                        <Button variant="contained" 
-                        sx= {{ 
-                            display: "none",        
-                            position: "absolute",
-                            color: "#FFFFFF",}}>Contained</Button>
                     </Box>
     <StickyHeadTable/> 
   </div>
