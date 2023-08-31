@@ -5,13 +5,19 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const User = () =>  { 
   return ( 
-  <div>
-    <Box margin="auto" width="90%" sx={{ flexGrow: 0, position: "relative"}}>
+    <Grid
+    container
+    spacing={3}
+    direction="column"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <Grid item margin="auto" width="90%" sx={{ flexGrow: 0, position: "relative"}}>
                         <img 
                             src="resources/profile-banner.png" 
                             loading="lazy"
                             style={{
-                                width: "100%",
+                                width: "90%",
                                 height: "auto",
                                 borderRadius: "10px",
                             }}
@@ -20,7 +26,7 @@ const User = () =>  {
                         <IconButton  sx={{ 
                             padding: 0,
                             position: "absolute",
-                            bottom: "-30px",
+                            bottom: "0px",
                             left: "30px",
                             zIndex: 1,
                             "&:hover": {
@@ -41,9 +47,9 @@ const User = () =>  {
                                 }}
                             />
                         </IconButton>
-                    </Box>
+                    </Grid>
     <StickyHeadTable/> 
-  </div>
+  </Grid>
   )
 }
 export default User ;
