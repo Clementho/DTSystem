@@ -1,60 +1,155 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import { IconButton } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-  {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
+  { id: "icon", label: "", minWidth: "auto" },
+  { id: "action", label: "Action", minWidth: "auto" },
+  { id: "initiator", label: "Initiator", minWidth: "auto" },
+  { id: "receiver", label: "Receiver", minWidth: "auto" },
+  { id: "time", label: "Time", minWidth: "auto" },
+  { id: "amount", label: "Amount", minWidth: "auto", align: "right" },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(image, action, initiator, receiver, time, amount) {
+  return {
+    image,
+    action,
+    initiator,
+    receiver,
+    time,
+    amount,
+  };
 }
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  createData(
+    "./resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    3287263
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    9596961
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    301340
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    9833520
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    9984670
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Listing",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    7692024
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    357578
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    70273
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Listing",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    1972550
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    377973
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    640679
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    242495
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    17098246
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Sale",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    923768
+  ),
+  createData(
+    "/resources/profile-image.png",
+    "Listing",
+    "@SeltradeX",
+    "cr1bypt123",
+    "4 Months ago",
+    8515767
+  ),
 ];
 
 export default function StickyHeadTable() {
@@ -71,10 +166,30 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Paper sx={{ mx:"auto", width:"80%"   }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+    <Paper
+      sx={{
+        mx: "auto",
+        width: "80%",
+        borderRadius: "10px",
+        backgroundColor: "#1B151F",
+      }}
+    >
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          backgroundColor: '#1B151F', // Background color
+          color: 'white', // Text color
+        }}
+      />
+      <TableContainer sx={{ maxHeight: 440, backgroundColor: '#1B151F'}}>
+        <Table stickyHeader aria-label="sticky table" sx={{ backgroundColor: '#1B151F' }}>
+          <TableHead >
             <TableRow>
               {columns.map((column) => (
                 <TableCell
@@ -92,14 +207,36 @@ export default function StickyHeadTable() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.action}
+                  >
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                        <TableCell key={column.id} align={column.align} style={{
+                          minWidth: column.minWidth,
+                          color: "#FFFFFF", // Set the font color to white
+                        }}>
+                          {column.id === "icon" ? (
+                            <IconButton>
+                              <img
+                                src={row.imageUrl}
+                                alt="Avatar"
+                                width="40"
+                                height="40"
+                              />{" "}
+                              {/* Add this */}
+                            </IconButton>
+                          ) : column.id === "amount" &&
+                            typeof value === "number" ? (
+                            // Format the 'amount' column as needed (example: add commas)
+                            value.toLocaleString()
+                          ) : (
+                            value
+                          )}
                         </TableCell>
                       );
                     })}
@@ -109,15 +246,6 @@ export default function StickyHeadTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }
