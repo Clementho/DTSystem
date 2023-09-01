@@ -7,7 +7,7 @@ import Marketplace from "./components/Pages/Marketplace/Marketplace";
 import User from "./components/Pages/User/UserPage";
 import EditProfile from "./components/Pages/User/EditProfile";
 import ProductDetails from "./components/Pages/ProductDetails/ProductDetails";
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
         <Route path="/user" element={<User />}></Route>
         <Route path="/editprofile" element={<EditProfile />}></Route>
         <Route path="/marketplace/:id" element={<ProductDetails />}></Route>
-
       </Routes>
+      <Footer />
     </div>
   );
 }
