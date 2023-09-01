@@ -17,16 +17,17 @@ export default function ProductTile(props) {
 
   return (
     <NavLink to={"/marketplace/" + id} style={{ textDecoration: "none" }}>
-      <Card sx={{ maxWidth: 345, borderRadius: "15px" }}>
+      <Card sx={{ 
+        maxWidth: 345, 
+        borderRadius: "15px", 
+        "&:hover":{
+          "& .card-content": {
+            bgcolor: "#7331e8"
+          }
+        }
+      }}>
         <CardMedia sx={{ height: 300 }} image={imageDir} title={productName} />
-        <CardContent
-          sx={{
-            bgcolor: "#2B2430",
-            "&:hover": {
-              bgcolor: "#7331e8",
-            },
-          }}
-        >
+        <CardContent className="card-content" sx={{bgcolor: "#2B2430"}}>
           <Typography gutterBottom variant="h5" component="div" color="#FFFFFF">
             {productName}
           </Typography>

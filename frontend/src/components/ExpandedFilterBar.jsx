@@ -16,54 +16,58 @@ import TextField from '@mui/material/TextField';
 
 export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
 
-    const propertiesList = [
-        "Clothes",
-        "Hat",
-        "Species",
-        "Background",
-        "Eyes"
-    ]
+    const subPropertiesList = {
+        "Clothes": ["Shirt", "Pants", "Shoes"],
+        "Hat": ["Top Hat", "Baseball Cap", "Fedora"],
+        "Species": ["Human", "Alien", "Animal"],
+        "Background": ["City", "Nature", "Space"],
+        "Eyes": ["Blue", "Green", "Brown"]
+    };
 
     const handleClick = () => {
         setExpandFilter(false)
     }
 
-    const accordions = propertiesList.map((property, index) => (
+    const accordions = Object.keys(subPropertiesList).map((property, index) => (
         <>
-        <Accordion sx={{
-            "&.MuiAccordion-root": {
-                bgcolor: "#1B151F",
-                color: "#8E8894"
-            }
-        }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color:"#8E8894" }}/>}
-          aria-controls={`${property}-content`}
-          id={`${property}-header`}
-        >
-          <Typography>{property}</Typography>
-        </AccordionSummary>
-
-        <AccordionDetails>
-            <FormGroup>
-                <FormControlLabel control={
-                    <Checkbox sx={{
-                        color: "#8E8894",
-                        "& .Mui-checked": {
-                            color: "#4800C6",
-                            bgcolor: "#FFFFFF"
-                        },
-                    }}/>
-                } label="Label 1" />
-                <FormControlLabel control={<Checkbox />} label="Label 2" />
-                <FormControlLabel control={<Checkbox />} label="Label 3" />
-            </FormGroup>
-        </AccordionDetails>
-
-      </Accordion>
-      <hr/>
-      </>
-    ))
+            <Accordion 
+                key={property}
+                sx={{
+                    "&.MuiAccordion-root": {
+                        bgcolor: "#1B151F",
+                        color: "#8E8894"
+                }
+            }}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon sx={{ color:"#8E8894" }}/>}
+                    aria-controls={`${property}-content`}
+                    id={`${property}-header`}
+                >
+                    <Typography>{property}</Typography>
+                </AccordionSummary>
+            
+                <AccordionDetails>
+                    <FormGroup>
+                        {subPropertiesList[property].map((subProperty, subIndex) => (
+                            <FormControlLabel
+                                key={`${property}-${subIndex}`}
+                                control={
+                                    <Checkbox sx={{
+                                        color: "#8E8894",
+                                        "&.Mui-checked": {
+                                            color: "#4800C6"
+                                        },
+                                    }}/>
+                                }
+                                label={subProperty}
+                            />
+                        ))}
+                    </FormGroup>
+                </AccordionDetails>
+            </Accordion>
+            <hr/>
+        </>
+    ));
 
 
   return (

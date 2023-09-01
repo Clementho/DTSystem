@@ -1,9 +1,9 @@
 import React from "react";
-import "./Carousel.css";
+import "../styles/Carousel.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-export const CarouselItem = (props) => {
+export default function CarouselItem (props) {
   const { id, productName, collectionName, productPrice } = props.product;
   //TODO: Clean this up when making the backend
   const imageDir = `/resources/asset-${id}.jpg`;

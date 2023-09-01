@@ -1,8 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import products from "../../../data/products.json";
+import products from "../data/products.json";
 import { Box, Grid, Button } from "@mui/material";
-import ColorTabs from "./ProductTabs";
+import SectionTabs from "../components/SectionTabs";
+import ProductOverview from '../components/ProductOverview';
+import Properties from '../components/Properties';
+import ActivityTable from "../components/ActivityTable";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -14,17 +17,13 @@ const ProductDetails = () => {
   const imageDir = `/resources/asset-${id}.jpg`;
 
   return (
-    <>
-      <Grid
+    <Grid container columns={{xs: 2}}>
+      <Grid item xs={2}
         sx={{
-          display: {
-            xs: "none",
-            sm: "flex",
-            paddingTop: "2.5%",
-            paddingBottom: "50px",
-            alignItems: "center",
-            justifyContent: "center",
-          },
+          display: "flex",
+          padding: "20px 30px",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <img
@@ -38,23 +37,22 @@ const ProductDetails = () => {
             marginRight: "50px",
           }}
         />
-        <div
-          style={{
-            width: "450px",
-            height: "300px",
-            paddingLeft: "25px",
-            paddingRight: "25px",
-            backgroundColor: "#1B151F",
-            borderRadius: "2.5%",
+        <Grid item
+          sx={{
+            width: "35%",
+            height: "max-content",
+            padding: "20px 25px",
+            bgcolor: "#1B151F",
+            borderRadius: "10px",
           }}
         >
           <h2>{productName}</h2>
           <p>{collectionName}</p>
           <h5 style={{ color: "gray" }}>Current Price</h5>
-          <Grid
+          <Grid item
             sx={{
               display: {
-                xs: "none",
+                xs: "flex",
                 sm: "flex",
                 alignItems: "center",
                 justifyContent: "left",
@@ -67,26 +65,23 @@ const ProductDetails = () => {
               alt="etherium"
               style={{ height: "60px", width: "40px", paddingRight: "15px" }}
             />
-            <h2>{productPrice}</h2>
+            <h2>{productPrice} ETH</h2>
           </Grid>
 
-          <Grid
+          <Grid item
             sx={{
-              display: {
-                paddingTop: "5px",
-                xs: "none",
-                sm: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              },
+              display: "flex",
+              padding: "5px 0px",
+              alignItems: "center",
+              justifyContent: "space-evenly",
             }}
           >
-            <div style={{ paddingRight: "20px" }}>
               <Button
-                size="medium"
                 variant="contained"
                 sx={{
-                  display: "flex",
+                  width: "45%",
+                  fontSize: "1.1em",
+                  fontWeight: "bolder",
                   bgcolor: "#4800C6",
                   "&:hover": {
                     bgcolor: "#7331e8",
@@ -95,29 +90,29 @@ const ProductDetails = () => {
               >
                 Buy Now
               </Button>
-            </div>
-            <div>
               <Button
-                size="medium"
                 variant="contained"
                 sx={{
-                  display: "flex",
+                  width: "45%",
+                  fontSize: "1.1em",
+                  color: "#AEAEAE",
                   bgcolor: "#302338",
                   "&:hover": {
-                    bgcolor: "#7331e8",
+                    bgcolor: "#302338",
+                    color: "#FFFFFF",
+                    fontWeight: "bold"
                   },
                 }}
               >
                 Make an Offer
               </Button>
-            </div>
           </Grid>
-        </div>
+        </Grid>
       </Grid>
-      <Grid
+      <Grid xs={2}
         sx={{
           display: {
-            xs: "none",
+            xs: "flex",
             sm: "flex",
             paddingTop: "2.5%",
             paddingBottom: "50px",
@@ -126,9 +121,9 @@ const ProductDetails = () => {
           },
         }}
       >
-        <ColorTabs />
+        <SectionTabs sections={["Overview", "Properties", "Activity"]} components={[<ProductOverview />, <Properties />,  <ActivityTable />]}/>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

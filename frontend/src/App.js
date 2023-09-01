@@ -1,13 +1,12 @@
 import "./App.css";
-import NavBar from "./components/Navigation/NavBar";
-import { Route, Routes } from "react-router-dom";
-import About from "./components/Pages/About/About";
-import Home from "./components/Pages/Home/Home";
-import Marketplace from "./components/Pages/Marketplace/Marketplace";
-import User from "./components/Pages/User/UserPage";
-import EditProfile from "./components/Pages/User/EditProfile";
-import ProductDetails from "./components/Pages/ProductDetails/ProductDetails";
-import Footer from "./components/Footer/Footer";
+import NavBar from "./components/NavBar";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Marketplace from "./pages/Marketplace";
+import User from "./pages/User";
+import EditProfile from "./pages/EditProfile";
+import ProductDetails from "./pages/ProductDetails";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -15,12 +14,13 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
         <Route path="/marketplace" element={<Marketplace />}></Route>
-        {/* TODO CHANGE THIS LATER */}
         <Route path="/user" element={<User />}></Route>
         <Route path="/editprofile" element={<EditProfile />}></Route>
         <Route path="/marketplace/:id" element={<ProductDetails />}></Route>
+
+        {/* Redirect to homepage when user tries to access non-existent page */}
+        <Route path="*" element={<Navigate to="/"/>} />
       </Routes>
       <Footer />
     </div>
