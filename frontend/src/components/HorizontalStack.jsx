@@ -3,6 +3,7 @@ import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -14,7 +15,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function HorizontalStack() {
   return (
-    <div style={{margin: "0 40px 0 auto"}}>
+    <Box sx={{
+      margin: {
+        xs: "30px 0",
+        lg: "0 20px 0 auto"
+      }
+    }}>
       <Stack
         direction="row"
         divider={<Divider sx={{bgcolor: "#FFFFFF"}} orientation="vertical" flexItem />}
@@ -24,6 +30,6 @@ export default function HorizontalStack() {
         <Item>76K+<br/>Collections</Item>
         <Item>243K+<br/>Artworks</Item>
       </Stack>
-    </div>
+    </Box>
   );
 }

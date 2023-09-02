@@ -36,18 +36,9 @@ function ResponsiveAppBar() {
     <AppBar position="static" sx={{ backgroundColor: "transparent", padding: "10px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <NavLink to={"/"} style={{ textDecoration: "none" }}>
-            <img
-              alt="logo"
-              style={{ width: "108px", height: "54px" }}
-              src="/resources/logo.png"
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-            />
-          </NavLink>
 
-          <SearchBar placeholder="Search..." />
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+        {/* HAMBURGERISED NAV BAR */}
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -73,7 +64,7 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "inherit", md: "none",},
               }}
             >
               {pages.map((page, index) => (
@@ -89,7 +80,23 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
 
-          {/* NAV HERE */}
+          <NavLink to={"/"} 
+            style={{ 
+              textDecoration: "none",
+              margin: "auto",
+            }}>
+            <img
+              alt="logo"
+              style={{ width: "108px", height: "54px" }}
+              src="/resources/logo.png"
+            />
+          </NavLink>
+
+          <SearchBar placeholder="Search..." />
+
+          
+
+          {/* NORMAL NAV BAR HERE - NON HAMBURGERISED NAVBAR */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
               <NavLink to={"/" + page} style={{ textDecoration: "none" }}>
@@ -121,6 +128,7 @@ function ResponsiveAppBar() {
               </NavLink>
             </Tooltip>
           </Box>
+          
         </Toolbar>
       </Container>
     </AppBar>
