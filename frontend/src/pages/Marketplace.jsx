@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
-import ProductTile from "../../ProductTile";
-import SearchBar from "../../SearchBar";
-import SortOptionsBar from "../../SortOptionsBar";
-import CollapsedFilterBar from "../../CollapsedFilterBar";
-import ExpandedFilterBar from "../../ExpandedFilterBar";
-import { Carousel } from "./Carousel/Carousel.jsx";
+import ProductTile from "../components/ProductTile";
+import SearchBar from "../components/SearchBar";
+import SortOptionsBar from "../components/SortOptionsBar";
+import CollapsedFilterBar from "../components/CollapsedFilterBar";
+import ExpandedFilterBar from "../components/ExpandedFilterBar";
+import Carousel from "../components/Carousel";
 
-import products from "../../../data/products.json";
-
+import products from "../data/products.json";
 
 const Marketplace = () => {
   const [expandFilter, setExpandFilter] = useState(false);
@@ -62,7 +61,8 @@ const Marketplace = () => {
           </Grid>
 
           {products.map((product, index) => (
-            <Grid item xs={2} sm={3} key={index}>
+             // Dynamically adjust each product tile's size within the grid system if filter bar is expanded/collapsed
+             <Grid item xs={2} sm={3} lg={ expandFilter ? 5 : 4 } key={index}> 
               <ProductTile key={product.id} product={product} />
             </Grid>
           ))}

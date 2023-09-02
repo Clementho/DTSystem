@@ -13,10 +13,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 
-import "./NavBar.css";
-import SearchBar from "../SearchBar";
+import SearchBar from "./SearchBar";
 
-const pages = ["Marketplace", "About", "EditProfile"];
+const pages = ["Marketplace"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,7 +33,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#190029", padding: "10px"}}>
+    <AppBar position="static" sx={{ backgroundColor: "transparent", padding: "10px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavLink to={"/"} style={{ textDecoration: "none" }}>
@@ -46,7 +45,7 @@ function ResponsiveAppBar() {
             />
           </NavLink>
 
-          <SearchBar placeholder="Search assets, collections and accounts" />
+          <SearchBar placeholder="Search..." />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

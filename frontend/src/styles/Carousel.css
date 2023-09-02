@@ -66,9 +66,11 @@
 }
 
 .indicator-symbol {
+  font-size: xx-large;
   color: #26343f;
 }
 
 .indicator-symbol-active {
+  font-size: xx-large;
   color: #ffffff;
 }

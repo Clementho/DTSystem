@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ScrollToTop from "./utils/scrollToTop";
 
 const theme = createTheme({
   typography: {
@@ -17,6 +18,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
+        <ScrollToTop />
         <App />
       </ThemeProvider>
     </BrowserRouter>

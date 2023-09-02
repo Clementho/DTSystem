@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { CarouselItem } from "./CarouselItem";
-import products from "../../../../data/products.json";
-import "./Carousel.css";
+import CarouselItem from "./CarouselItem";
+import products from "../data/products.json";
+import "../styles/Carousel.css";
 
-export const Carousel = () => {
+export default function Carousel(){
   const [activeIndex, setActiveIndex] = useState(0);
 
   const updateIndex = (newIndex) => {
