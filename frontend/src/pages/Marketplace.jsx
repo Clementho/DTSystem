@@ -23,14 +23,7 @@ const Marketplace = () => {
         <Grid
           justifyContent="center"
           alignItems="center"
-          sx={{
-            display: {
-              xs: "none",
-              sm: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          }}
+          display="flex"
         >
           <Carousel />
         </Grid>

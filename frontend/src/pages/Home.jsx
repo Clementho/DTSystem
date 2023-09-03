@@ -31,9 +31,9 @@ const Home = () => {
             transform: "translate(-50%, -50%)",
             textAlign: "center"
           }}>
-            <Typography variant="h2" fontWeight="bold" fontSize="8vw">HyperETH</Typography>
+            <Typography variant="h2" fontWeight="bold" fontSize={{xs: "3rem", sm: "8rem"}}>HyperETH</Typography>
             <br/><br/>
-            <Typography variant="h5" fontWeight="bold" fontFamily="Orbitron">Where NFT Dreams Take Flight</Typography>
+            <Typography variant="h5" fontWeight="bold" fontFamily="Orbitron" fontSize="1.5rem">Where NFT Dreams Take Flight</Typography>
           </Box>
         </Box>
       </Grid>
@@ -41,7 +41,7 @@ const Home = () => {
       <Grid container xs={12} display="flex" margin="200px 0" alignItems="center">
         <Grid item xs={12} lg={6} textAlign="center">
           <img
-              src="resources/test2.jpeg"
+              src="resources/landing-page2.jpeg"
               style={{
                 height: "100vh",
                 width: "100%",
@@ -51,7 +51,6 @@ const Home = () => {
 
         <Grid 
           item
-          border="5px solid red"
           xs={12} lg={6}
           sx={{
             position: {
@@ -63,16 +62,12 @@ const Home = () => {
               lg: "left"
             },
             bgcolor: {
-              xs: "rgba(0,0,0,0.6)",
+              xs: "rgba(0,0,0,0.7)",
               lg: "transparent"
             },
             display: {
               xs: "flex",
               lg: "initial"
-            },
-            width: {
-              xs: "80%",
-              lg: "50%"
             },
             height: {
               xs: "100vh",
@@ -82,26 +77,28 @@ const Home = () => {
             justifyContent: "center"
           }}
         >
-        <Typography variant="h3" fontWeight="bold">Discover the HyperETH NFT Market</Typography>
-            <br/>
-            <Typography variant="h6" color="#AEAEAE">Dive into a vibrant marketplace filled with unique digital treasures, collectibles, and artistry. Our decentralized platform empowers you to explore, buy, and trade NFTs with ease. Don't miss out on the next big thing in digital ownership—start your journey now!</Typography>
-            <br/><br/>
-            <Box display="flex" alignItems="center" flexDirection={{xs: "column", lg: "row"}}>
-              <NavLink to="/marketplace">
-                <Button 
-                variant="contained"
-                size="large"
-                sx={{
-                  bgcolor: "#4800C6",
-                  fontWeight:"bold",
-                  letterSpacing: "2px",
-                  "&:hover": {
-                    bgcolor: "#7331e8"
-                  }
-                }}>Explore Now</Button>
-              </NavLink>
-              <HorizontalStack />
-            </Box>
+          <Box width="90%" margin={{xs:"auto", lg:"0"}}>
+            <Typography variant="h3" fontWeight="bold" fontSize="3.3rem">Discover the HyperETH NFT Market</Typography>
+              <br/>
+              <Typography variant="h6" color="#AEAEAE" fontSize="1.2rem">Dive into a vibrant marketplace filled with unique digital treasures, collectibles, and artistry. Our decentralized platform empowers you to explore, buy, and trade NFTs with ease. Don't miss out on the next big thing in digital ownership—start your journey now!</Typography>
+              <br/><br/>
+              <Box display="flex" alignItems="center" flexDirection={{xs: "column", lg: "row"}}>
+                <NavLink to="/marketplace">
+                  <Button 
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    bgcolor: "#4800C6",
+                    fontWeight:"bold",
+                    letterSpacing: "2px",
+                    "&:hover": {
+                      bgcolor: "#7331e8"
+                    }
+                  }}>Explore Now</Button>
+                </NavLink>
+                <HorizontalStack />
+              </Box>
+          </Box>
         </Grid>
       </Grid>
       
