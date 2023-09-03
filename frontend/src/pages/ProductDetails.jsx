@@ -134,7 +134,7 @@ const ProductDetails = () => {
 
       </Grid>
 
-      <Grid
+      <Grid container
         sx={{
           display: {
             xs: "flex",
