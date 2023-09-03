@@ -8,6 +8,7 @@ import "../styles/Carousel.css";
 export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Keep track of the index when traversing the carousel
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
       newIndex = 0;
