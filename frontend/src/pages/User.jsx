@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ActivityTable from '../components/ActivityTable';
-import { Grid, Box, Avatar, Typography, Button } from '@mui/material';
+import { Grid, Box, Avatar, Typography } from '@mui/material';
 import SectionTabs from '../components/SectionTabs';
 import ProductTile from '../components/ProductTile';
 import CollapsedFilterBar from '../components/CollapsedFilterBar';

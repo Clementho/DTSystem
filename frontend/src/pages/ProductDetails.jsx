@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import products from "../data/products.json";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Box } from "@mui/material";
 import SectionTabs from "../components/SectionTabs";
 import ProductOverview from "../components/ProductOverview";
 import Properties from "../components/Properties";
@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
   // Searches for product in local cache and assigns it
   const product = products.find((product) => product.id === parseInt(id));
-  const { prodID, productName, collectionName, productPrice } = product;
+  const { productName, collectionName, productPrice } = product;
 
   //TODO: Clean this up when making the backend
   const imageDir = `/resources/asset-${id}.jpg`;
