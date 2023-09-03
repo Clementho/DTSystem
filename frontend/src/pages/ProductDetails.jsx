@@ -17,99 +17,124 @@ const ProductDetails = () => {
   const imageDir = `/resources/asset-${id}.jpg`;
 
   return (
-    <Grid container columns={{xs: 2}}>
-      <Grid item xs={2}
+    <Grid container>
+      <Grid container
         sx={{
-          display: "flex",
+          display: {
+            xs: "block",
+            md: "flex",
+          },
           padding: "20px 30px",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <img
-          src={imageDir}
-          style={{
-            width: "450px",
-            height: "600px",
-            objectFit: "cover",
-            borderRadius: "2.5%",
-            boxShadow: "0px 0px 10px #fff",
-            marginRight: "50px",
-          }}
-        />
-        <Grid item
-          sx={{
-            width: "35%",
-            height: "max-content",
-            padding: "20px 25px",
-            bgcolor: "#1B151F",
-            borderRadius: "10px",
-          }}
-        >
-          <h2>{productName}</h2>
-          <p>{collectionName}</p>
-          <h5 style={{ color: "gray" }}>Current Price</h5>
-          <Grid item
-            sx={{
-              display: {
-                xs: "flex",
-                sm: "flex",
-                alignItems: "center",
-                justifyContent: "left",
-                paddingBottom: "5px",
-              },
+        <Grid item xs={12} md={6}>
+          <Box 
+            textAlign={{
+              xs: "center",
+              md: "right"
+            }}
+            marginRight={{
+              xs: 0,
+              md:"30px"
             }}
           >
-            <img
-              src="/resources/eth-logo-coloured.png"
-              alt="etherium"
-              style={{ height: "60px", width: "40px", paddingRight: "15px" }}
-            />
-            <h2>{productPrice} ETH</h2>
-          </Grid>
-
-          <Grid item
-            sx={{
-              display: "flex",
-              padding: "5px 0px",
-              alignItems: "center",
-              justifyContent: "space-evenly",
+          <img
+            src={imageDir}
+            style={{
+              width: "30vw",
+              height: "38vw",
+              objectFit: "cover",
+              borderRadius: "2.5%",
+              boxShadow: "0px 0px 10px #fff",
             }}
-          >
-              <Button
-                variant="contained"
-                sx={{
-                  width: "45%",
-                  fontSize: "1.1em",
-                  fontWeight: "bolder",
-                  bgcolor: "#4800C6",
-                  "&:hover": {
-                    bgcolor: "#7331e8",
-                  },
-                }}
-              >
-                Buy Now
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  width: "45%",
-                  fontSize: "1.1em",
-                  color: "#AEAEAE",
-                  bgcolor: "#302338",
-                  "&:hover": {
-                    bgcolor: "#302338",
-                    color: "#FFFFFF",
-                    fontWeight: "bold"
-                  },
-                }}
-              >
-                Make an Offer
-              </Button>
-          </Grid>
+          />
+          </Box>
         </Grid>
+
+        
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              width: "80%",
+              height: "max-content",
+              padding: "20px 25px",
+              bgcolor: "#1B151F",
+              borderRadius: "10px",
+              margin: {
+                xs: "30px auto",
+                md: "0",
+              }
+            }}
+          >
+            <h2>{productName}</h2>
+            <p>{collectionName}</p>
+            <h5 style={{ color: "gray" }}>Current Price</h5>
+            <Grid item
+              sx={{
+                display: {
+                  xs: "flex",
+                  sm: "flex",
+                  alignItems: "center",
+                  justifyContent: "left",
+                  paddingBottom: "5px",
+                },
+              }}
+            >
+              <img
+                src="/resources/eth-logo-coloured.png"
+                alt="etherium"
+                style={{ height: "60px", width: "40px", paddingRight: "15px" }}
+              />
+              <h2>{productPrice} ETH</h2>
+            </Grid>
+
+            <Grid item
+              sx={{
+                display: "flex",
+                padding: "5px 0px",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "45%",
+                    fontSize: "1.1em",
+                    fontWeight: "bolder",
+                    bgcolor: "#4800C6",
+                    "&:hover": {
+                      bgcolor: "#7331e8",
+                    },
+                  }}
+                >
+                  Buy Now
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "45%",
+                    fontSize: "1.1em",
+                    color: "#AEAEAE",
+                    bgcolor: "#302338",
+                    "&:hover": {
+                      bgcolor: "#302338",
+                      color: "#FFFFFF",
+                      fontWeight: "bold"
+                    },
+                  }}
+                >
+                  Make Offer
+                </Button>
+            </Grid>
+          </Box>
+        </Grid>
+
       </Grid>
-      <Grid xs={2}
+
+      <Grid
         sx={{
           display: {
             xs: "flex",

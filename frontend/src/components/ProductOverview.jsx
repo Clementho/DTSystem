@@ -14,7 +14,7 @@ export default function ProductOverview() {
             Every pixel in this digital tapestry tells a story of exploration, curiosity, and the boundless potential of human ingenuity.
       </Typography>
 
-      <Grid container columns={{xs:1, sm: 2}} display="flex" marginTop="10px" alignItems="center" justifyContent="space-evenly"> 
+      <Grid container columns={{xs:1, md:2}} display="flex" marginTop="10px" alignItems="center" justifyContent="space-evenly"> 
         <Grid xs={1} display="flex" marginY="20px" alignItems="center">
             <Avatar alt="Remy Sharp" src="/resources/profile-image2.jpg" sx={{ width: 110, height: 110 }}/>
             <Box marginLeft="15px">

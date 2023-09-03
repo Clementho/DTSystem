@@ -55,7 +55,7 @@ const Marketplace = () => {
 
           {products.map((product, index) => (
              // Dynamically adjust each product tile's size within the grid system if filter bar is expanded/collapsed
-             <Grid item xs={2} sm={3} lg={ expandFilter ? 5 : 4 } key={index}> 
+             <Grid item xs={2} sm={3} md={ expandFilter? 4 : 3 } lg={ expandFilter ? 5 : 4 } key={index}> 
               <ProductTile key={product.id} product={product} />
             </Grid>
           ))}

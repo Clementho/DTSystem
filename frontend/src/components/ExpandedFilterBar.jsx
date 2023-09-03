@@ -36,12 +36,19 @@ export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
                     "&.MuiAccordion-root": {
                         bgcolor: "#1B151F",
                         color: "#8E8894"
-                }
-            }}>
+                    },
+                }}
+            >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon sx={{ color:"#8E8894" }}/>}
                     aria-controls={`${property}-content`}
                     id={`${property}-header`}
+                    sx={{
+                        marginTop: {
+                            xs: "50px",
+                            md: "0"
+                        }
+                    }}
                 >
                     <Typography>{property}</Typography>
                 </AccordionSummary>
@@ -71,13 +78,40 @@ export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
 
 
   return (
-    // <CSSTransition
-    //     in={expandFilter}
-    //     timeout={300}
-    //     classNames="expandFilter-transition"
-    //     unmountOnExit
-    // >
-    <Box sx={{width: "30%", padding: "10px",  paddingBottom:"50px", bgcolor: "#1B151F", height: "fit-content"}}>
+    <Box 
+        sx={{
+            width: {
+                xs: "100vw",
+                md:"30%",
+            },
+            height: {
+                xs: "100vh",
+                md:"fit-content",
+            },
+            padding: "10px", 
+            paddingBottom:"50px",
+            bgcolor: "#1B151F",
+            position: {
+                xs: "fixed",
+                md: "initial"
+            },
+            top: {
+                xs: 0,
+                md: "initial"
+            },
+            left: {
+                xs: 0,
+                md: "initial"
+            },
+            zIndex: {
+                xs: 2,
+                md: 0,
+            },
+            overflowY: {
+                xs: "scroll",
+                md: "initial",
+            }
+        }}>
         <Box display="flex" alignItems="center" position="relative" justifyContent="center">
         <Button
             size='large'
@@ -97,8 +131,9 @@ export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
 
         <h2>Filters</h2>
         </Box>
-
-        <Box display="flex" alignItems="center" paddingX="10px">
+        
+        <Box paddingX="10px">
+        <Box display="flex" alignItems="center">
             <h3>Price</h3>
             <Button
                 size="medium"
@@ -117,7 +152,7 @@ export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
             >Apply</Button>
         </Box>
 
-        <Box display="flex" alignItems="center" justifyContent="flex-start" padding="10px" columnGap="20px">
+        <Box display="flex" alignItems="center" justifyContent="flex-start" padding="10px 0px" columnGap="20px">
             <TextField
                 label="Min" 
                 id="Min" 
@@ -168,13 +203,19 @@ export default function ExpandedFilterBar({expandFilter, setExpandFilter}) {
                 }}
             />
         </Box>
+        <hr/>
+        </Box>
         
-        <Box sx={{ padding: "0px 10px" }}>
-            <hr/>
+        <Box sx={{ 
+            padding: "0px 10px",
+            marginTop: {
+                xs: "100px",
+                md: "0"
+            }
+        }}>
             <h3>Properties</h3>
             {accordions}
         </Box>
     </Box>
-    // </CSSTransition>
   );
 }

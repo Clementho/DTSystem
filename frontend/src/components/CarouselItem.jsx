@@ -33,10 +33,15 @@ export default function CarouselItem (props) {
           sx={{
             marginTop: "5vh",
             display: "flex",
+            fontWeight: "bold",
             bgcolor: "#4800C6",
             "&:hover": {
               bgcolor: "#7331e8",
             },
+            marginX: {
+              xs: "auto",
+              md: "0"
+            }
           }}
         >
           View Listings

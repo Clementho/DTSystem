@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 
@@ -65,7 +66,7 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
 
 export default function ActivityTable() {
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 400, width: '100%' }}>
       <StripedDataGrid
         rows={rows}
         columns={columns}
@@ -81,6 +82,6 @@ export default function ActivityTable() {
           params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
         }
       />
-    </div>
+    </Box>
   );
 }
