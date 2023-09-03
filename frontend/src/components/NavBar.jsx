@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 
+// Navigation Bar Component
+// Adapted from https://mui.com/material-ui/react-app-bar/
 import SearchBar from "./SearchBar";
 
 const pages = ["Marketplace"];
@@ -33,7 +35,10 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "transparent", padding: "10px"}}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "transparent", padding: "10px" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavLink to={"/"} style={{ textDecoration: "none" }}>
@@ -89,7 +94,7 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
 
-          {/* NAV HERE */}
+          {/* NAVBAR HERE */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
               <NavLink to={"/" + page} style={{ textDecoration: "none" }}>

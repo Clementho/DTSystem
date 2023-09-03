@@ -3,7 +3,9 @@ import "../styles/Carousel.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function CarouselItem (props) {
+// Adapted from https://github.com/harakisgeorge/carouselreact\
+
+export default function CarouselItem(props) {
   const { id, productName, collectionName, productPrice } = props.product;
   //TODO: Clean this up when making the backend
   const imageDir = `/resources/asset-${id}.jpg`;
@@ -44,4 +46,4 @@ export default function CarouselItem (props) {
       </div>
     </div>
   );
-};
+}

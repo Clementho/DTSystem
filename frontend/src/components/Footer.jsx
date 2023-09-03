@@ -3,7 +3,8 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 // Adapted from https://gist.github.com/SahanAmarsha/c36b57572679ae0ab8e9773b70120ed4
-export default function Footer(){
+
+export default function Footer() {
   return (
     <footer>
       <Box
@@ -38,4 +39,4 @@ export default function Footer(){
       </Box>
     </footer>
   );
-};
+}

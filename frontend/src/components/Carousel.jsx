@@ -3,7 +3,9 @@ import CarouselItem from "./CarouselItem";
 import products from "../data/products.json";
 import "../styles/Carousel.css";
 
-export default function Carousel(){
+// Adapted from https://github.com/harakisgeorge/carouselreact\
+
+export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const updateIndex = (newIndex) => {
@@ -52,4 +54,4 @@ export default function Carousel(){
       </div>
     </div>
   );
-};
+}
