@@ -1,0 +1,1 @@
+Please run "npm install" in "frontend" directory to install all necessary packages & dependencies
