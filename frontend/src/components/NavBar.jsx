@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 
+// Navigation Bar Component
+// Adapted from https://mui.com/material-ui/react-app-bar/
 import SearchBar from "./SearchBar";
 
 const pages = ["Marketplace"];
@@ -33,7 +35,10 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "transparent", padding: "10px"}}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "transparent", padding: "10px" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 
@@ -69,6 +74,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  {/* Routes to relevant page */}
                   <NavLink
                     to={"/" + page}
                     style={{ textDecoration: "none", color: "black" }}
@@ -95,7 +101,6 @@ function ResponsiveAppBar() {
           <SearchBar placeholder="Search..." />
 
           
-
           {/* NORMAL NAV BAR HERE - NON HAMBURGERISED NAVBAR */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
@@ -120,7 +125,7 @@ function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Profile">
-              {/* TODO CHANGE THIS ASWELL */}
+              {/* Routes to user profile */}
               <NavLink to={"/User"} style={{ textDecoration: "none" }}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar src="/resources/profile-image.png" />

@@ -1,15 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import products from "../data/products.json";
-import { Box, Grid, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import SectionTabs from "../components/SectionTabs";
-import ProductOverview from '../components/ProductOverview';
-import Properties from '../components/Properties';
+import ProductOverview from "../components/ProductOverview";
+import Properties from "../components/Properties";
 import ActivityTable from "../components/ActivityTable";
 
 const ProductDetails = () => {
+  // Get id of product through the url parameters
   const { id } = useParams();
 
+  // Searches for product in local cache and assigns it
   const product = products.find((product) => product.id === parseInt(id));
   const { prodID, productName, collectionName, productPrice } = product;
 
@@ -17,6 +19,7 @@ const ProductDetails = () => {
   const imageDir = `/resources/asset-${id}.jpg`;
 
   return (
+
     <Grid container>
       <Grid container
         sx={{
@@ -29,6 +32,7 @@ const ProductDetails = () => {
           justifyContent: "center",
         }}
       >
+
         <Grid item xs={12} md={6}>
           <Box 
             textAlign={{
@@ -53,7 +57,7 @@ const ProductDetails = () => {
           </Box>
         </Grid>
 
-        
+
         <Grid item xs={12} md={6}>
           <Box
             sx={{
@@ -68,6 +72,7 @@ const ProductDetails = () => {
               }
             }}
           >
+
             <h2>{productName}</h2>
             <p>{collectionName}</p>
             <h5 style={{ color: "gray" }}>Current Price</h5>
@@ -146,7 +151,10 @@ const ProductDetails = () => {
           },
         }}
       >
-        <SectionTabs sections={["Overview", "Properties", "Activity"]} components={[<ProductOverview />, <Properties />,  <ActivityTable />]}/>
+        <SectionTabs
+          sections={["Overview", "Properties", "Activity"]}
+          components={[<ProductOverview />, <Properties />, <ActivityTable />]}
+        />
       </Grid>
     </Grid>
   );
