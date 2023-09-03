@@ -10,10 +10,11 @@ import Carousel from "../components/Carousel";
 import products from "../data/products.json";
 
 const Marketplace = () => {
-  const [expandFilter, setExpandFilter] = useState(false);
+  const [expandFilter, setExpandFilter] = useState(false); //conditional to determine which filter bar component to render
 
   return (
     <>
+      {/* Product Carousel component rendered here*/}
       <div
         style={{
           width: "100%",
@@ -30,11 +31,12 @@ const Marketplace = () => {
       </div>
 
       <h1>Marketplace</h1>
-
+      
+    {/* Marketplace asset listing & search, filter, sort components rendered here */}
     <Box sx={{flexGrow: 1, width: "95%", margin: "auto", display: "flex", columnGap: "20px"}}> 
     
-
-      { expandFilter && <ExpandedFilterBar expandFilter={expandFilter} setExpandFilter={setExpandFilter}/> }
+      {/* Renders expanded filter bar if expandFilter = true */}
+      { expandFilter && <ExpandedFilterBar expandFilter={expandFilter} setExpandFilter={setExpandFilter}/> } 
 
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 9, md: 12, lg: 20 }}>
         
@@ -47,6 +49,7 @@ const Marketplace = () => {
                 marginLeft: expandFilter ? "-20px" : 0
               }}
             >
+              {/* Renders collapsed filter bar if expandFilter = false */}
               { !expandFilter && <CollapsedFilterBar setExpandFilter={setExpandFilter}/> }
               <SearchBar placeholder="Search..."/>
               <SortOptionsBar />
