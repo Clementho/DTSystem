@@ -3,16 +3,20 @@ import React from "react";
 import HorizontalStack from "../components/HorizontalStack";
 import { NavLink } from "react-router-dom";
 
+//Home page design is split into mutliple full screen content sections, 2 at the moment
 
 const Home = () => {
   return (
     <Grid container>
+
+      {/* Full screen content display 1 - Site name and punch line section */}
       <Grid item xs={12}>
         <Box
           width="100%"
           height="100%"
           position="relative"
         >
+          {/* Box element which renders the landing page image as background */}
           <Box 
             sx={{
               backgroundImage: "url('resources/landing-page.jpg')",
@@ -24,6 +28,7 @@ const Home = () => {
               opacity: 0.6,
           }} />
 
+          {/* Site name and punch line elements - Aligned in center of screen */}
           <Box sx={{
             position: "absolute",
             top: "50%",
@@ -37,7 +42,8 @@ const Home = () => {
           </Box>
         </Box>
       </Grid>
-
+        
+      {/* Full screen content display 2 - Description text to wow users + metrics of active users/collections/artworks */}
       <Grid container xs={12} display="flex" margin="200px 0" alignItems="center">
         <Grid item xs={12} lg={6} textAlign="center">
           <img
@@ -96,7 +102,9 @@ const Home = () => {
                     }
                   }}>Explore Now</Button>
                 </NavLink>
-                <HorizontalStack />
+
+                {/* Component which renders live site total metrics: active users, collections, artworks */}
+                <HorizontalStack /> 
               </Box>
           </Box>
         </Grid>

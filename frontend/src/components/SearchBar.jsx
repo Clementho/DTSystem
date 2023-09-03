@@ -46,6 +46,7 @@ const Search = styled("div")(({ theme }) => ({
 export default function SearchBar (props) {
     const {placeholder} = props;
 
+    //Search bar hidden on devices with screen sizes 0-900px
     return (
         <Search sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <SearchIconWrapper>

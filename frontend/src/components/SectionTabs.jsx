@@ -38,6 +38,8 @@ function a11yProps(index) {
   };
 }
 
+//Receives an array of section names and their respective react components to render as props
+//Components are dynamically rendered based on the active tab
 export default function SectionTabs({sections, components}) {
   const [value, setValue] = React.useState(0);
 

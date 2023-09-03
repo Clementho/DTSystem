@@ -3,6 +3,7 @@ import * as React from "react";
 
 export default function PropertyCard({rarity}){
 
+    //Product properties have 4 rarity levels, split at 25% each
     const styleTag = () => {
         if(rarity >= 75 && rarity <= 100) return { background: "linear-gradient(45deg, #5cd07d, #3bcf3d)" }; //common
         else if(rarity >= 50) return { background: "linear-gradient(45deg, #28e2f0, #0075ff)" }; //uncommon
