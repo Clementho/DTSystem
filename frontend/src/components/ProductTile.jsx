@@ -28,7 +28,7 @@ export default function ProductTile(props) {
       }}>
         <CardMedia sx={{ height: 300 }} image={imageDir} title={productName} />
         <CardContent className="card-content" sx={{bgcolor: "#2B2430"}}>
-          <Typography gutterBottom variant="h5" component="div" color="#FFFFFF">
+          <Typography gutterBottom variant="h5" component="div" color="#FFFFFF" fontSize="1.5rem">
             {productName}
           </Typography>
           <Typography
@@ -36,6 +36,7 @@ export default function ProductTile(props) {
             color="#AEAEAE"
             marginTop="-10px"
             marginBottom="10px"
+            fontSize="0.9rem"
           >
             {collectionName}
           </Typography>
@@ -51,14 +52,14 @@ export default function ProductTile(props) {
                 alt="Currency"
                 style={{ width: 20, height: 30, marginRight: 4 }}
               />
-              <Typography variant="subtitle2" color="#FFFFFF" fontSize="1.2em">
+              <Typography variant="subtitle2" color="#FFFFFF" fontSize="1.2rem">
                 {productPrice}
               </Typography>
               <Typography
                 marginLeft="3px"
                 variant="subtitle2"
                 color="#FFFFFF"
-                fontSize="0.9em"
+                fontSize="0.9rem"
               >
                 ETH
               </Typography>

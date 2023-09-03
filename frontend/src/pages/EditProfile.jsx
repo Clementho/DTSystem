@@ -7,9 +7,9 @@ const EditProfile = () => {
         <>
         <h1>Edit Profile</h1>
         <Box sx={{ width: "85%", margin: "auto", marginTop: "80px" }}>
-            <Grid container spacing={{ xs: 2, }} >
-                <Grid item xs >
-                    <Box margin="auto" width="65%" >
+            <Grid container spacing={{ xs: 2 }} >
+                <Grid item xs={12} md={6} order={{xs: 2, md: 1}} >
+                    <Box margin="auto" width={{xs:"90%", md:"65%"}}>
                     <h2>Username</h2>
                     <TextField 
                         variant="outlined"
@@ -86,9 +86,8 @@ const EditProfile = () => {
                     </Box>
                 </Grid>
 
-                <Divider orientation="vertical" flexItem sx={{bgcolor: "#8E8894"}}></Divider>
-
-                <Grid item xs >
+                
+                <Grid item xs={12} md={6} order={{xs: 1, md: 2}}>
                     <Box margin="auto" width="90%" sx={{ flexGrow: 0, position: "relative"}}>
                         <h2>Image &#38; Banner</h2>
                         <Box sx={{
@@ -140,7 +139,10 @@ const EditProfile = () => {
                             padding: 0,
                             position: "absolute",
                             bottom: "-30px",
-                            left: "30px",
+                            left: {
+                                xs: "20px",
+                                md: "30px",
+                            },
                             zIndex: 1,
                             "&:hover": {
                                 "& .edit-icon-avatar": {
@@ -152,7 +154,7 @@ const EditProfile = () => {
                             }
                         }}>
                             
-                            <Avatar alt="Remy Sharp" src="/resources/profile-image.png" sx={{ width: 110, height: 110 }}/>
+                            <Avatar alt="Remy Sharp" src="/resources/profile-image.png" sx={{ width: {xs: 80, sm:110}, height: {xs: 80, sm:110} }}/>
                             <Box // Semi-transparent white background on hover
                                 className="hover-background-avatar"
                                 sx={{
