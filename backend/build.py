@@ -8,11 +8,11 @@ from solcx import compile_standard, install_solc
 
 # LIST OF ALL SMART CONTRACT FILES TO COMPILE
 contract_files = [
-    "../contracts/AssetPurchase.sol",
-    "../contracts/UserAccount.sol"
+    "./contracts/AssetPurchase.sol",
+    "./contracts/UserAccount.sol"
 ]
 
-output_dir = "../artifacts"
+output_dir = "./artifacts"
 
 # make the artifacts direccory if it doesnt exist
 os.makedirs(output_dir, exist_ok=True)

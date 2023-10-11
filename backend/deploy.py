@@ -5,17 +5,12 @@
 
 import os, json
 from web3 import Web3
-
-# HARDCODED CONFIGS
-GANACHE_RPC_SERVER_URL = "HTTP://127.0.0.1:7545"
-CHAIN_ID = 1337
-GANACHE_MNEMONIC = "rain promote winner saddle merry merry anchor liberty glimpse nut tourist priority"
-CONTRACTS_DEPLOY_ADDRESS = "0xA7cC6ec64a6C9051283C330d19699E25cB2ECEF3"
-CONTRACTS_DEPLOY_ADDRESS_PRIVATE_KEY = "0x7b286d6ac232155f32e6d8cd79e4922ba05ddd52e339b6e4281883d57e4cd9d3"
+from config.blockchain_network_config import GANACHE_RPC_SERVER_URL, CHAIN_ID
+from config.contract_address_config import CONTRACTS_DEPLOY_ADDRESS, CONTRACTS_DEPLOY_ADDRESS_PRIVATE_KEY
 
 w3 = Web3(Web3.HTTPProvider(GANACHE_RPC_SERVER_URL))
 
-artifacts_dir = "../artifacts"
+artifacts_dir = "./artifacts"
 
 # List all JSON files in the artifacts folder
 artifact_files = [f for f in os.listdir(artifacts_dir) if f.endswith(".json")]
