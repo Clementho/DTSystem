@@ -168,7 +168,7 @@ const ProductDetails = () => {
           sections={["Overview", "Properties", "Activity"]}
           components={[
             <ProductOverview description={product.description} />,
-            <Properties />,
+            <Properties id={id} />,
             <ActivityTable />,
           ]}
         />

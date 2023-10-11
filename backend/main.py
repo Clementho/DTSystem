@@ -1,12 +1,12 @@
 # uvicorn main:app --reload
 
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, HTTPException, Depends, status, Query
+from fastapi import FastAPI, HTTPException, Depends, status, Query, Path
 from typing import Annotated, List, Optional
 from models import User, Collection, Asset, Property, UserAsset, AssetProperty
 import models
 from database import engine, SessionLocal, Base
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -74,6 +74,30 @@ def get_asset(asset_id: int, db: Session = Depends(get_db)):
 def get_all_assets(db: Session = Depends(get_db)):
     assets = db.query(Asset).all()
     return assets
+
+
+# GET properties by asset ID
+@app.get("/get_properties_for_asset/{asset_id}")
+def get_properties_for_asset(asset_id: int = Path(..., description="The ID of the asset to retrieve properties for"),
+                             db: Session = Depends(get_db)):
+    asset_properties = db.query(AssetProperty).filter(AssetProperty.assetID == asset_id).all()
+    if not asset_properties:
+        raise HTTPException(status_code=404, detail="Asset not found")
+
+    # Get the associated properties for the asset from the junction table
+    property_ids = [asset_property.propertyID for asset_property in asset_properties]
+    properties = db.query(Property).filter(Property.propertyID.in_(property_ids)).all()
+
+    return properties
+
+
+# GET collection name by ID
+@app.get("/get_collection_name/{collection_id}")
+def get_collection_name(collection_id: int, db: Session = Depends(get_db)):
+    collection = db.query(Collection).filter(Collection.collectionID == collection_id).first()
+    if collection is None:
+        raise HTTPException(status_code=404, detail="Collection not found")
+    return {"collection_name": collection.collectionName}
 
 
 @app.get("/filter")
