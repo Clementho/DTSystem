@@ -1,20 +1,84 @@
-import { Box, Grid, TextField, Avatar, IconButton, Divider } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Grid, TextField, Avatar, IconButton, Typography, Button } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
-import React from "react";
+import SnackBar from "../components/SnackBar";
+
+import { useGetProfile } from "../hooks/useGetProfile";
+import { useUpdateProfile } from "../hooks/useUpdateProfile";
+
 
 const EditProfile = () => {
+    const { profileData, getProfileError, isFetching } = useGetProfile();
+    const { updateUserProfile, isUpdating, updateError, updateSuccess } = useUpdateProfile();
+
+     // Snackbar states
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("");
+
+    // Set initial profile form fields
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [biography, setBiography] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSnackMessage("");
+
+        const newProfileData = {
+            "name": username,
+            "email": email,
+            "biography": biography
+        }
+
+        await updateUserProfile(newProfileData);
+    }
+
+    //If profile data is finished fetching, initialise the input fields with the profile data
+    useEffect(() => {
+
+        if (profileData) {
+            setUsername(profileData.name || "");
+            setEmail(profileData.email || "");
+            setBiography(profileData.biography || "");
+        }
+
+    }, [profileData]);
+
+    useEffect(() => {
+
+        if(getProfileError || updateError) {
+            setSnackMessage(updateError);
+            setSnackSeverity("error");
+        } else if (updateSuccess) {
+            setSnackMessage("Profile updated successfully!");
+            setSnackSeverity("success");
+        }
+
+    }, [ getProfileError, updateError, updateSuccess])
+
     return(
         <>
+        <SnackBar message={snackMessage} severity={snackSeverity} />
+        <SnackBar message={isUpdating ? "Updating user profile...": ""} severity="info" />
+
         <h1>Edit Profile</h1>
         <Box sx={{ width: "85%", margin: "auto", marginTop: "80px" }}>
             <Grid container spacing={{ xs: 2 }} >
                 <Grid item xs={12} md={6} order={{xs: 2, md: 1}} >
-                    <Box margin="auto" width={{xs:"90%", md:"65%"}}>
+                    <form 
+                        style={{
+                            margin: "auto",
+                            width: {xs:"90%", md:"65%"},
+                        }}
+                        onSubmit={handleSubmit}
+                    >
                     <h2>Username</h2>
                     <TextField 
                         variant="outlined"
                         placeholder="Enter your username"
                         fullWidth
+                        value={isFetching ? "Fetching profile..." : username}
+                        onChange={(e) => setUsername(e.target.value)}
                         sx={{
                             "& .MuiInputLabel-root": {color: "#8E8894"}, //styles the label
                             "& .MuiOutlinedInput-root": {
@@ -39,6 +103,8 @@ const EditProfile = () => {
                         variant="outlined"
                         placeholder="Enter your email address"
                         fullWidth
+                        value={isFetching ? "Fetching profile..." : email}
+                        onChange={(e) => setEmail(e.target.value)}
                         sx={{
                             "& .MuiInputLabel-root": {color: "#8E8894"}, //styles the label
                             "& .MuiOutlinedInput-root": {
@@ -64,6 +130,8 @@ const EditProfile = () => {
                         variant="outlined"
                         placeholder="Write a short bio!"
                         fullWidth
+                        value={isFetching ? "Fetching profile..." : biography}
+                        onChange={(e) => setBiography(e.target.value)}
                         sx={{
                             "& .MuiInputLabel-root": {color: "#8E8894"}, //styles the label
                             "& .MuiOutlinedInput-root": {
@@ -83,7 +151,27 @@ const EditProfile = () => {
                             }
                         }}
                     />
-                    </Box>
+
+                    <Button
+                        disabled={isUpdating}
+                        variant="contained"
+                        type="submit"
+                        sx={{
+                            display: "block",
+                            marginTop: "50px",
+                            marginX: {xs: "auto", md: "0"},
+                            padding: "10px 20px",
+                            fontSize: "1.1em",
+                            fontWeight: "bold",
+                            bgcolor: "#4800C6",
+                            "&:hover": {
+                              bgcolor: "#7331e8",
+                            },
+                          }}
+                    >
+                        <Typography>Save Changes</Typography>
+                    </Button>
+                    </form>
                 </Grid>
 
                 

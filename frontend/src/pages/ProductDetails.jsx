@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import products from "../data/products.json";
 import { Grid, Button, Box } from "@mui/material";
@@ -6,6 +6,7 @@ import SectionTabs from "../components/SectionTabs";
 import ProductOverview from "../components/ProductOverview";
 import Properties from "../components/Properties";
 import ActivityTable from "../components/ActivityTable";
+import SnackBar from "../components/SnackBar";
 
 const ProductDetails = () => {
   // Get id of product through the url parameters
@@ -15,12 +16,25 @@ const ProductDetails = () => {
   const product = products.find((product) => product.id === parseInt(id));
   const { productName, collectionName, productPrice } = product;
 
+  // Snackbar states
+  const [snackMessage, setSnackMessage] = useState("");
+  const [snackSeverity, setSnackSeverity] = useState("");
+
   //TODO: Clean this up when making the backend
   const imageDir = `/resources/asset-${id}.jpg`;
+
+
+  const handlePurchase = () => {
+    setSnackMessage("kavnalsdknvads")
+    setSnackSeverity("success")
+  }
 
   return (
 
     <Grid container>
+
+      <SnackBar message={snackMessage} severity={snackSeverity}/>
+
       <Grid container
         sx={{
           display: {
@@ -105,6 +119,7 @@ const ProductDetails = () => {
             >
                 <Button
                   variant="contained"
+                  onClick={handlePurchase}
                   sx={{
                     width: "45%",
                     fontSize: "1.1em",
@@ -117,6 +132,7 @@ const ProductDetails = () => {
                 >
                   Buy Now
                 </Button>
+
                 <Button
                   variant="contained"
                   sx={{
