@@ -70,6 +70,12 @@ async def readUser(user_address):
 @router.post("/updateUserInfo")
 async def updateUser(userData: UserData, user_address: str = Depends(get_user_address)):
     try:
+        if(userData.name == ""):
+            raise HTTPException(status_code=400, detail="Name cannot be empty")
+        
+        if(userData.email == ""): 
+            raise HTTPException(status_code=400, detail="Email cannot be empty")
+
         # Call the updateUserInfo function
         tx_hash = user_contract_instance.functions.updateUserInfo(userData.name, userData.email, userData.biography).transact({"from": user_address})
 
@@ -77,6 +83,9 @@ async def updateUser(userData: UserData, user_address: str = Depends(get_user_ad
         w3.eth.wait_for_transaction_receipt(tx_hash)
 
         return {"message": "User information updated successfully!"}
+    
+    except HTTPException as http_exception:
+        raise http_exception  # Re-raise HTTPException with its status code and detail message intact
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
