@@ -1,7 +1,8 @@
 # DEPLOY.PY
 # Script to deploy compiled Solidity smart contracts onto a specified blockchain address
+# Run "python deploy.py" in terminal/console to build smart contract files
 # Program will print out the addresses of each deployed smart contract
-# Copy them and paste them in each smart contract's CONSTANT VARIABLE in ../config/contract_address_config.py
+# Copy them and paste them in each smart contract's CONSTANT VARIABLE in config/contract_address_config.py
 
 import os, json
 from web3 import Web3
