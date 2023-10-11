@@ -2,6 +2,7 @@ import json
 import os
 from config.blockchain_network_config import GANACHE_RPC_SERVER_URL
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from web3 import Web3
 import routes.user_routes as user_routes
 import routes.asset_routes as asset_routes
@@ -16,6 +17,15 @@ else:
     print("Ganache server up and running")
 
 app = FastAPI()
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include the route modules
 app.include_router(user_routes.router, prefix="/api/user")
