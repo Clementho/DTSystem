@@ -5,8 +5,10 @@ import "../styles/Carousel.css";
 
 // Adapted from https://github.com/harakisgeorge/carouselreact\
 
-export default function Carousel() {
+export default function Carousel(props) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  products = props.products;
 
   // Keep track of the index when traversing the carousel
   const updateIndex = (newIndex) => {
