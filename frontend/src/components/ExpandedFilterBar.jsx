@@ -23,29 +23,23 @@ export default function ExpandedFilterBar({
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
   const [selectedProperties, setSelectedProperties] = useState([]);
-  const [collectionName, setCollectionName] = useState("");
+  const [collectionName, setCollectionName] = useState(null);
 
   const subPropertiesList = {
-    Clothes: ["Shirt", "Pants", "Shoes"],
-    Hat: ["Top Hat", "Baseball Cap", "Fedora"],
-    Species: ["Human", "Alien", "Animal"],
-    Background: ["City", "Nature", "Space"],
-    Eyes: ["Blue", "Green", "Brown"],
+    Species: ["Rat", "Monkey"],
+    Rating: ["Monkeyness Rating"],
+    Material: ["Shiny", "Golden"],
   };
 
-  const handleFilter = async () => {
+  const handleFilter = () => {
     try {
-      const response = await axios.get("http://localhost:8000/filter", {
-        params: {
-          min_price: minPrice,
-          max_price: maxPrice,
-          properties: selectedProperties,
-          collection_name: collectionName,
-        },
-      });
-
-      const filteredAssets = response.data;
-      onFilter(filteredAssets); // Pass the filtered assets to the parent component
+      const body = {
+        min_price: parseFloat(minPrice),
+        max_price: parseFloat(maxPrice),
+        properties: selectedProperties,
+        collection_name: collectionName,
+      };
+      onFilter(body); // Pass the filtered assets to the parent component
     } catch (error) {
       console.error("Error filtering assets:", error);
     }
@@ -81,17 +75,26 @@ export default function ExpandedFilterBar({
         </AccordionSummary>
 
         <AccordionDetails>
-          <FormGroup>
+          <FormGroup key={property}>
             {subPropertiesList[property].map((subProperty, subIndex) => (
               <FormControlLabel
                 key={`${property}-${subIndex}`}
                 control={
                   <Checkbox
-                    sx={{
-                      color: "#8E8894",
-                      "&.Mui-checked": {
-                        color: "#4800C6",
-                      },
+                    checked={selectedProperties.includes(subProperty)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedProperties([
+                          ...selectedProperties,
+                          subProperty,
+                        ]);
+                      } else {
+                        setSelectedProperties(
+                          selectedProperties.filter(
+                            (prop) => prop !== subProperty
+                          )
+                        );
+                      }
                     }}
                   />
                 }
@@ -172,6 +175,7 @@ export default function ExpandedFilterBar({
           <Button
             size="medium"
             variant="outlined"
+            onClick={handleFilter}
             sx={{
               marginLeft: "auto",
               color: "#4800C6",

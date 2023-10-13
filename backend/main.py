@@ -100,7 +100,7 @@ def get_collection_name(collection_id: int, db: Session = Depends(get_db)):
     return {"collection_name": collection.collectionName}
 
 
-@app.get("/filter")
+@app.post("/filter")
 async def get_filter(filter_params: FilterParamsBody, db: Session = Depends(get_db)):
     min_price = filter_params.min_price
     max_price = filter_params.max_price

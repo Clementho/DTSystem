@@ -28,6 +28,20 @@ const Marketplace = () => {
     getAllAssets();
   }, []);
 
+  const handleFilteredAssets = async (body) => {
+    console.log(body);
+    console.log(body.properties);
+    axios.defaults.headers["Content-Type"] = "application/json";
+    const response = await axios.post("http://localhost:8000/filter", {
+      min_price: body.min_price,
+      max_price: body.max_price,
+      properties: body.properties,
+      collection_name: body.collection_name,
+    });
+    const filteredAssets = response.data;
+    setProducts(filteredAssets);
+  };
+
   return (
     <>
       {/* Product Carousel component rendered here*/}
@@ -59,6 +73,7 @@ const Marketplace = () => {
           <ExpandedFilterBar
             expandFilter={expandFilter}
             setExpandFilter={setExpandFilter}
+            onFilter={handleFilteredAssets}
           />
         )}
 
