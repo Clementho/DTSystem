@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useScrollTrigger } from "@mui/material";
 import ProductTile from "../components/ProductTile";
 import SearchBar from "../components/SearchBar";
 import SortOptionsBar from "../components/SortOptionsBar";
@@ -13,6 +13,7 @@ const backendURL = "http://localhost:8000";
 const Marketplace = () => {
   const [expandFilter, setExpandFilter] = useState(false);
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function getAllAssets() {
@@ -79,7 +80,7 @@ const Marketplace = () => {
               {!expandFilter && (
                 <CollapsedFilterBar setExpandFilter={setExpandFilter} />
               )}
-              <SearchBar placeholder="Search..." />
+              <SearchBar type="text" placeholder="Search..." />
               <SortOptionsBar />
             </Box>
           </Grid>

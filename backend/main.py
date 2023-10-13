@@ -78,7 +78,7 @@ def get_all_assets(db: Session = Depends(get_db)):
 
 # GET properties by asset ID
 @app.get("/get_properties_for_asset/{asset_id}")
-def get_properties_for_asset(asset_id: int = Path(..., description="The ID of the asset to retrieve properties for"),
+def get_properties_for_asset(asset_id: int = Path(...),
                              db: Session = Depends(get_db)):
     asset_properties = db.query(AssetProperty).filter(AssetProperty.assetID == asset_id).all()
     if not asset_properties:
@@ -101,7 +101,7 @@ def get_collection_name(collection_id: int, db: Session = Depends(get_db)):
 
 
 @app.get("/filter")
-async def get_filter( filter_params: FilterParamsBody, db: Session = Depends(get_db)):
+async def get_filter(filter_params: FilterParamsBody, db: Session = Depends(get_db)):
     min_price = filter_params.min_price
     max_price = filter_params.max_price
     properties = filter_params.properties
@@ -125,7 +125,16 @@ async def get_filter( filter_params: FilterParamsBody, db: Session = Depends(get
     return filtered_assets
 
 
+# GET assets by name
+@app.get("/get_assets_by_name/{asset_name}")
+def get_assets_by_name(asset_name: str = Path(...),
+                       db: Session = Depends(get_db)):
+    assets = db.query(Asset).filter(Asset.assetName == asset_name).all()
+    if not assets:
+        raise HTTPException(status_code=404, detail="No assets found with the provided name")
+    return assets
+
+
 @app.get("/")
 async def ping():
     return "Hello world"
-

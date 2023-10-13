@@ -26,7 +26,7 @@ export default function Properties(props) {
         <Grid item xs={1}>
           <PropertyCard
             property={property}
-            rarity={Math.floor(Math.random() * 100)}
+            rarity={property.propertyRarity * 100}
           />
         </Grid>
       ))}

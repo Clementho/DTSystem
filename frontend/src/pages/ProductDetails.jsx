@@ -27,7 +27,7 @@ const ProductDetails = () => {
       }
     }
     getAsset();
-  }, []);
+  }, [id]);
 
   //TODO: Clean this up when making the backend
   const imageDir = `/resources/asset-${id}.jpg`;
