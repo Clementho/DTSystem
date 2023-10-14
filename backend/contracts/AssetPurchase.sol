@@ -3,44 +3,67 @@ pragma solidity ^0.8.0;
 
 contract AssetPurchase {
     struct Purchase {
+        uint256 tradeID;
         uint256 assetID;
         string assetName;
         uint256 assetPrice;
         uint256 purchasedTime;
-        address owner; // Store the owner's address
+        address buyer; 
+        address seller;
     }
 
     mapping(address => Purchase[]) private purchases;
 
-    event PurchaseRecorded(address indexed user, string assetName, uint256 assetPrice, uint256 purchasedTime);
+    event PurchaseRecorded(
+        uint256 tradeID,
+        uint256 assetID,
+        string assetName,
+        uint256 assetPrice,
+        uint256 purchasedTime,
+        address indexed buyer,
+        address indexed seller
+    );
 
     // Record a new purchase transaction and transfer the asset's price to another account
-    function recordPurchase(uint256 _assetID, string memory _assetName, uint256 _assetPrice, address _receiver) public {
-        require(msg.sender.balance >= _assetPrice, "Insufficient balance"); // Check the sender's balance
-        require(_receiver != address(0), "Invalid receiver address"); // No receiver address means no one to actually make the payment to
+    function recordPurchase(uint256 _tradeID, uint256 _assetID, string memory _assetName, uint256 _assetPrice, address _seller) external {
 
-        // Transfer the asset's price to the receiver
-        payable(_receiver).transfer(_assetPrice);
-
+        
         Purchase memory purchase = Purchase({
+            tradeID: _tradeID,
             assetID: _assetID,
             assetName: _assetName,
             assetPrice: _assetPrice,
             purchasedTime: block.timestamp,
-            owner: msg.sender // Set the buyer as the new owner
+            buyer: msg.sender,
+            seller: _seller
         });
+
         purchases[msg.sender].push(purchase);
-        emit PurchaseRecorded(msg.sender, _assetName, _assetPrice, block.timestamp);
+        emit PurchaseRecorded(
+            _tradeID,
+            _assetID,
+            _assetName,
+            _assetPrice,
+            block.timestamp,
+            msg.sender,
+            _seller
+        );
     }
 
     // Get the total count of purchase transactions made by an account
-    function getPurchaseCount(address account) public view returns (uint) {
-        return purchases[account].length;
+    function getPurchaseCount() external view returns (uint) {
+        return purchases[msg.sender].length;
+    }
+
+    // Get all purchase transactions made by an account
+    function getAllPurchase() external view returns (Purchase[] memory) {
+
+        return purchases[msg.sender];
     }
 
     // Get a specified purchase transaction by its index
-    function getPurchase(address account, uint index) public view returns (string memory, uint256, uint256, address) {
-        Purchase memory purchase = purchases[account][index];
-        return (purchase.assetName, purchase.assetPrice, purchase.purchasedTime, purchase.owner);
+    function getPurchase(uint index) external view returns (Purchase memory) {
+
+        return purchases[msg.sender][index];
     }
 }

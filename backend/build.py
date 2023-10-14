@@ -9,7 +9,8 @@ from solcx import compile_standard, install_solc
 # LIST OF ALL SMART CONTRACT FILES TO COMPILE
 contract_files = [
     "./contracts/AssetPurchase.sol",
-    "./contracts/UserAccount.sol"
+    "./contracts/UserAccount.sol",
+    "./contracts/Escrow.sol"
 ]
 
 output_dir = "./artifacts"

@@ -12,7 +12,7 @@ export default function CarouselItem(props) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/marketplace/" + id);
+    navigate(`/product/${id}`);
   };
 
   return (

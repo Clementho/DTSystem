@@ -16,7 +16,7 @@ export default function ProductTile(props) {
   const imageDir = `/resources/asset-${id}.jpg`;
 
   return (
-    <NavLink to={"/marketplace/" + id} style={{ textDecoration: "none" }}>
+    <NavLink to={`/product/${id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ 
         maxWidth: 345, 
         borderRadius: "15px", 

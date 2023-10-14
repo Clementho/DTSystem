@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Box, Grid, TextField, Avatar, IconButton, Typography, Button } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import SnackBar from "../components/SnackBar";
 
 import { useGetProfile } from "../hooks/useGetProfile";
@@ -8,7 +10,8 @@ import { useUpdateProfile } from "../hooks/useUpdateProfile";
 
 
 const EditProfile = () => {
-    const { profileData, getProfileError, isFetching } = useGetProfile();
+    const address = "0x780B021bc49E53a475b9Bf2b0D8817008BfE0468";
+    const { fetchProfile, profileData, getProfileError, isFetching } = useGetProfile();
     const { updateUserProfile, isUpdating, updateError, updateSuccess } = useUpdateProfile();
 
      // Snackbar states
@@ -30,12 +33,15 @@ const EditProfile = () => {
             "biography": biography
         }
 
-        await updateUserProfile(newProfileData);
+        await updateUserProfile(address,newProfileData);
     }
+
+    useEffect(() => {
+        fetchProfile(address);
+    }, [])
 
     //If profile data is finished fetching, initialise the input fields with the profile data
     useEffect(() => {
-
         if (profileData) {
             setUsername(profileData.name || "");
             setEmail(profileData.email || "");
@@ -64,6 +70,22 @@ const EditProfile = () => {
         <h1>Edit Profile</h1>
         <Box sx={{ width: "85%", margin: "auto", marginTop: "80px" }}>
             <Grid container spacing={{ xs: 2 }} >
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            padding: "12px",
+                        }}
+                        component={Link}
+                        to="/user"
+                    >
+                        <ArrowCircleLeftIcon sx={{marginRight: "10px", width: "30px", height: "30px"}}/>
+                        <Typography fontSize="1.1rem" fontWeight="bold" textAlign="center">
+                            Back to Profile
+                        </Typography>
+                    </Button>
+                </Grid>
+
                 <Grid item xs={12} md={6} order={{xs: 2, md: 1}} >
                     <form 
                         style={{

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import ActivityTable from '../components/ActivityTable';
 import { Grid, Box, Avatar, Typography } from '@mui/material';
@@ -12,10 +12,47 @@ import SortOptionsBar from "../components/SortOptionsBar";
 import ShareIcon from '@mui/icons-material/Share';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
+import { useGetProfile } from "../hooks/useGetProfile";
+import { useGetTransactions } from "../hooks/useGetTransactions";
+
 import products from "../data/products.json"
 
 const User = () =>  {
+  const { fetchProfile, profileData, getProfileError, isFetching } = useGetProfile();
+  const { tranxData, getTranxError, isFetchingTranx } = useGetTransactions();
+  const [tranxRows, setTranxRows] = useState([]);
   const [expandFilter, setExpandFilter] = useState(false);
+
+      useEffect(() => {
+        const rows = [];
+    
+        if(tranxData) { 
+    
+          tranxData.map((transaction) => {
+            const row = {
+              id: transaction.tradeID,
+              profileImg: 'resources/profile-image.png',
+              action: "Sale",
+              assetName: transaction.assetName,
+              initiator: transaction.buyer,
+              receiver: transaction.seller,
+              time: transaction.purchasedTime,
+              amount: transaction.assetPrice,
+            }
+    
+            rows.push(row)
+          })
+        }
+    
+        setTranxRows(rows);
+    
+    }, [tranxData]);
+
+    // Fetch user profile details on mount
+    useEffect(() => {
+      fetchProfile("0x780B021bc49E53a475b9Bf2b0D8817008BfE0468");
+    }, []);
+      
 
   const UserItems = () => (
     <Box sx={{flexGrow: 1, width: "100%", margin: "auto", display: "flex", columnGap: "20px"}}> 
@@ -78,11 +115,9 @@ const User = () =>  {
 
       <Grid item xs={2} marginTop="80px" display="flex" justifyContent="center">
         <Box margin="auto" width="55%">
-          <Typography variant="h3">@SeltradeX</Typography>
+          <Typography variant="h3">{profileData ? profileData.name : ""}</Typography>
           <br/>
-          <Typography fontSize="1.2vw">Hey there, I'm Max – your friendly neighborhood NFT and crypto explorer! Join me on my exhilarating journey through the NFT cosmos and the crypto universe – where pixels meet prosperity, and innovation knows no bounds.</Typography> 
-          <br/>
-          <Typography fontSize="1.2vw" fontWeight="bold">#NFTs #CryptoArt #DeFiWizard #10YearsStrong #MetaverseExplorer</Typography>
+          <Typography fontSize="1.2vw">{profileData ? profileData.biography : ""}</Typography>
         </Box>
 
         <Box margin="auto" width="30%" height="100%" textAlign="right">
@@ -94,7 +129,7 @@ const User = () =>  {
       </Grid>
 
       <Grid item xs={2} display="flex" alignItems="center" justifyContent="center" marginTop="50px">
-        <SectionTabs sections={["Items", "Transactions"]} components={[<UserItems />, <ActivityTable />]}/>
+        <SectionTabs sections={["Items", "Transactions"]} components={[<UserItems />, <ActivityTable rows={tranxRows} isLoading={isFetchingTranx} />]}/>
       </Grid>
     </Grid>
   );

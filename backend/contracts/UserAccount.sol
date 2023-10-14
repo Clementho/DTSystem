@@ -19,11 +19,11 @@ contract UserAccount {
     event UserInfoUpdated(address indexed user, string newUserName, string newUserEmail, string newUserBiography);
 
     // Register new user account
-    function registerUser(string memory _name, string memory _email, string memory _biography) public {
+    function registerUser(string memory _name, string memory _email, string memory _biography) external {
         // Biography is an optional field
         require(bytes(_name).length > 0, "Name cannot be empty");
         require(bytes(_email).length > 0, "Email cannot be empty");
-        require(bytes(userInfo[msg.sender].userName).length == 0, "User already registered"); //Assumption that unique usernames are required for our application
+        require(bytes(userInfo[msg.sender].userName).length == 0, "User already registered");
 
         UserInfo memory newUser = UserInfo(_name, _email, _biography);
         userInfo[msg.sender] = newUser;
@@ -32,13 +32,13 @@ contract UserAccount {
     }
 
     // Get the information of a user's account
-    function getUserInfo() public view returns (string memory, string memory, string memory) {
+    function getUserInfo() external view returns (string memory, string memory, string memory) {
         UserInfo memory user = userInfo[msg.sender];
         return (user.userName, user.userEmail, user.userBiography);
     }
 
     // Update user information
-    function updateUserInfo(string memory _newName, string memory _newEmail, string memory _newBiography) public {
+    function updateUserInfo(string memory _newName, string memory _newEmail, string memory _newBiography) external {
         require(bytes(_newName).length > 0, "Name cannot be empty");
         require(bytes(_newEmail).length > 0, "Email cannot be empty");
         require(bytes(userInfo[msg.sender].userName).length > 0, "User not registered"); // Ensure the user is registered

@@ -6,17 +6,17 @@ export const useUpdateProfile = () => {
     const [updateError, setUpdateError] = useState(null);
     const [updateSuccess, setUpdateSuccess] = useState(false);
 
-    const updateUserProfile = async (profileData) => {
+    const updateUserProfile = async (address, profileData) => {
         setUpdateSuccess(false);
         setIsUpdating(true);
         setUpdateError(null);
 
         try{
-            await axios.post("/api/user/updateUserInfo", profileData);
+            await axios.post(`/api/user/updateUserInfo/${address}`, profileData);
             setUpdateSuccess(true);
 
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Update Profile Error:', error);
             setUpdateError(error.response.data?.detail)
         }
         setIsUpdating(false);
