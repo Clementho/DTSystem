@@ -7,6 +7,7 @@ from models import User, Collection, Asset, Property, UserAsset, AssetProperty
 import models
 from database import engine, SessionLocal, Base
 from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import and_, or_
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -107,22 +108,34 @@ async def get_filter(filter_params: FilterParamsBody, db: Session = Depends(get_
     properties = filter_params.properties
     collection_name = filter_params.collection_name
 
-    # Build the base query
+    # Base SQL query
     query = db.query(Asset).join(Collection).join(AssetProperty).join(Property)
 
-    # Apply filters based on the request body
-    if min_price is not None:
-        query = query.filter(Asset.price >= min_price)
-    if max_price is not None:
-        query = query.filter(Asset.price <= max_price)
+    # Build the WHERE clause based on filter parameters
+    filters = []
+
+    if min_price is not None and max_price is not None:
+        # Add a filter to select assets with prices within the specified range
+        filters.append(and_(Asset.price >= min_price, Asset.price <= max_price))
+    elif min_price is not None:
+        filters.append(Asset.price >= min_price)
+    elif max_price is not None:
+        filters.append(Asset.price <= max_price)
+
     if properties is not None:
-        query = query.filter(Property.propertyName.in_(properties))
+        # Add a filter to select assets with any of the specified properties
+        filters.append(Property.propertyName.in_(properties))
     if collection_name is not None:
-        query = query.filter(Collection.collectionName.in_(collection_name))
+        filters.append(Collection.collectionName.in_([collection_name]))
+
+    # Apply the filters to the query using the OR operator for properties
+    if filters:
+        query = query.filter(or_(*filters))
 
     # Execute the query and return the filtered assets
     filtered_assets = query.all()
     return filtered_assets
+
 
 
 # GET assets by name
