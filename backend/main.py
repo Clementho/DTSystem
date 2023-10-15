@@ -1,6 +1,5 @@
 import json
 import os
-import asyncio
 from web3 import Web3
 import routes.user_routes as user_routes
 import routes.asset_routes as asset_routes
