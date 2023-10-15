@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import SnackBar from "./SnackBar";
 import { NavLink } from "react-router-dom";
 
 // Navigation Bar Component
@@ -22,6 +23,10 @@ const pages = ["Marketplace"];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  // Snackbar states
+  const [snackMessage, setSnackMessage] = React.useState("");
+  const [snackSeverity, setSnackSeverity] = React.useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,6 +44,8 @@ function ResponsiveAppBar() {
       position="static"
       sx={{ backgroundColor: "transparent", padding: "10px" }}
     >
+      <SnackBar message={snackMessage} severity={snackSeverity} />
+
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 
@@ -98,7 +105,7 @@ function ResponsiveAppBar() {
             />
           </NavLink>
 
-          <SearchBar placeholder="Search..." />
+          <SearchBar placeholder="Search..." setSnackMessage={setSnackMessage} setSnackSeverity={setSnackSeverity} />
 
           
           {/* NORMAL NAV BAR HERE - NON HAMBURGERISED NAVBAR */}

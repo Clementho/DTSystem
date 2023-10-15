@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import CarouselItem from "./CarouselItem";
-import products from "../data/products.json";
 import "../styles/Carousel.css";
 
 // Adapted from https://github.com/harakisgeorge/carouselreact\
 
-export default function Carousel() {
+export default function Carousel({products}) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Keep track of the index when traversing the carousel
@@ -26,7 +25,7 @@ export default function Carousel() {
         style={{ transform: `translate(-${activeIndex * 100}%)` }}
       >
         {products.map((product) => {
-          return <CarouselItem product={product} />;
+          return <CarouselItem product={product}/>;
         })}
       </div>
       <div className="carousel-buttons">

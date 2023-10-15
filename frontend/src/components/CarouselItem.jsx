@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 // Adapted from https://github.com/harakisgeorge/carouselreact\
 
-export default function CarouselItem(props) {
-  const { id, productName, collectionName, productPrice } = props.product;
+export default function CarouselItem({product}) {
   //TODO: Clean this up when making the backend
-  const imageDir = `/resources/asset-${id}.jpg`;
+  const imageDir = `/resources/asset-2.jpg`;
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product/${id}`);
+    navigate("/marketplace/" + product.assetID);
   };
 
   return (
@@ -22,11 +21,9 @@ export default function CarouselItem(props) {
       </div>
       <div className="carousel-item-text">
         <h5 style={{ fontStyle: "italic", color: "gray" }}>FEATURED</h5>
-        <h2>{productName}</h2>
+        <h2>{product.assetName}</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
+          {product.assetDescription}
         </p>
         <Button
           onClick={handleClick}
@@ -42,8 +39,8 @@ export default function CarouselItem(props) {
             },
             marginX: {
               xs: "auto",
-              md: "0"
-            }
+              md: "0",
+            },
           }}
         >
           View Listings

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import products from "../data/products.json";
-import { Grid, Button, Box } from "@mui/material";
+import { Grid, Button, Box, Typography } from "@mui/material";
 import SectionTabs from "../components/SectionTabs";
 import ProductOverview from "../components/ProductOverview";
 import Properties from "../components/Properties";
 import ActivityTable from "../components/ActivityTable";
 import SnackBar from "../components/SnackBar";
+import axios from "axios";
 
 import { useBuyAsset } from "../hooks/useBuyAsset";
 import { useGetTransactions } from "../hooks/useGetTransactions";
@@ -14,10 +14,7 @@ import { useGetTransactions } from "../hooks/useGetTransactions";
 const ProductDetails = () => {
   // Get id of product through the url parameters
   const { id } = useParams();
-
-  // Searches for product in local cache and assigns it
-  const product = products.find((product) => product.id === parseInt(id));
-  const { productName, collectionName, productPrice } = product;
+  const [product, setProduct] = useState([]);
 
   // Snackbar states
   const [snackMessage, setSnackMessage] = useState("");
@@ -26,9 +23,6 @@ const ProductDetails = () => {
 
   const { handleAssetPurchase, isPurchasing, purchaseError, purchaseSuccess } = useBuyAsset();
   const { tranxData, getTranxError, isFetchingTranx } = useGetTransactions();
-
-  //TODO: Clean this up when making the backend
-  const imageDir = `/resources/asset-${id}.jpg`;
 
   useEffect(() => {
     const rows = [];
@@ -58,16 +52,33 @@ const ProductDetails = () => {
 
 }, [tranxData]);
 
+useEffect(() => {
+  async function getAsset() {
+    try {
+      const response = await axios.get(`/api/db/get_asset/${id}`);
+      const assetData = response.data;
+
+      setProduct(assetData);
+    } catch (error) {
+      console.error("Error fetching asset: ", error);
+    }
+  }
+  getAsset();
+}, [id]);
+
+
+//TODO: Clean this up when making the backend
+const imageDir = `/resources/asset-${id}.jpg`;
 
 
   const handlePurchase = async () => {
     setSnackMessage("");
 
     const purchaseData = {
-      "assetName": productName,
-      "assetPrice": productPrice,
+      "assetName": product.assetName,
+      "assetPrice": product.assetPrice,
       "buyer": "0x780B021bc49E53a475b9Bf2b0D8817008BfE0468",
-      "seller": "0xC2B5Eb3ae2c95070228EAC89ECCB495791216918"
+      "seller": product.ownerAddress
     }
 
     try {
@@ -81,9 +92,27 @@ const ProductDetails = () => {
     if(purchaseError) {
         setSnackMessage(purchaseError);
         setSnackSeverity("error");
+
     } else if (purchaseSuccess) {
-        setSnackMessage("Purchase has been made successfully!")
-        setSnackSeverity("success");
+
+      async function updateAsset() {
+        const new_asset_owner = "0x780B021bc49E53a475b9Bf2b0D8817008BfE0468"
+        
+        try {
+          // Make an API request to update the asset in the database
+          await axios.put(`/api/db/update_asset_owner/${id}`, new_asset_owner);
+
+          setSnackMessage("Purchase has been made successfully!");
+          setSnackSeverity("success");
+
+        } catch (error) {
+          setSnackMessage("Something went wrong with your purchase. Please try again later");
+          setSnackSeverity("error");
+        }
+      }
+
+      updateAsset();
+
     }
 }, [ purchaseError, purchaseSuccess ])
 
@@ -146,9 +175,22 @@ const ProductDetails = () => {
             }}
           >
 
-            <h2>{productName}</h2>
-            <p>{collectionName}</p>
-            <h5 style={{ color: "gray" }}>Current Price</h5>
+            <Typography sx={{
+              fontWeight: "bold",
+              fontSize: "2.4em",
+            }}>
+              {product.assetName}
+            </Typography>
+
+            <Typography sx={{
+              color: "#9b02e8",
+              fontSize: "1.15em",
+              fontStyle: "italic",
+            }}>
+              {product.collectionName}
+            </Typography>
+
+            <Typography sx={{ color: "gray", fontWeight: "600", margin: "30px 0 10px 0"}}>Current Price</Typography>
             <Grid item
               sx={{
                 display: {
@@ -165,7 +207,12 @@ const ProductDetails = () => {
                 alt="etherium"
                 style={{ height: "60px", width: "40px", paddingRight: "15px" }}
               />
-              <h2>{productPrice} ETH</h2>
+              <Typography sx={{
+                fontWeight: "bold",
+                fontSize: "1.6em",
+              }}>
+                {product.assetPrice} ETH
+              </Typography>
             </Grid>
 
             <Grid item
@@ -174,6 +221,7 @@ const ProductDetails = () => {
                 padding: "5px 0px",
                 alignItems: "center",
                 justifyContent: "space-evenly",
+                marginTop: "10px"
               }}
             >
                 <Button
@@ -228,7 +276,7 @@ const ProductDetails = () => {
       >
         <SectionTabs
           sections={["Overview", "Properties", "Activity"]}
-          components={[<ProductOverview />, <Properties />, <ActivityTable rows={tranxRows} isLoading={isFetchingTranx}/>]}
+          components={[<ProductOverview description={product.assetDescription} creator={product.creatorAddress} owner={product.ownerAddress}/>, <Properties id={id}/>, <ActivityTable rows={tranxRows} isLoading={isFetchingTranx}/>]}
         />
       </Grid>
     </Grid>

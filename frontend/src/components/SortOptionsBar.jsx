@@ -8,10 +8,9 @@ import Select from '@mui/material/Select';
 //https://mui.com/material-ui/react-select/
 
 const sortOptions = [
-    "Recently Listed",
-    "Recently Sold",
+    "Price (Low to High)",
     "Price (High to Low)",
-    "Price (Low to High)"
+    
 ]
 
 const ITEM_HEIGHT = 48;
@@ -27,11 +26,23 @@ const MenuProps = {
     }
 }
 
-export default function SortOptionsBar() {
+export default function SortOptionsBar({ products, setFilteredProducts }) {
   const [sortOption, setSortOption] = React.useState(sortOptions[0]);
 
   const handleChange = (event) => {
-    setSortOption(event.target.value);
+    const selectedOption = event.target.value;
+    setSortOption(selectedOption);
+
+    // Sort the products based on the selected sorting option
+    const sortedProducts = [...products];
+    if (selectedOption === "Price (Low to High)") {
+      sortedProducts.sort((a, b) => a.assetPrice - b.assetPrice);
+    } else if (selectedOption === "Price (High to Low)") {
+      sortedProducts.sort((a, b) => b.assetPrice - a.assetPrice);
+    }
+
+    // Update the filtered products with the sorted products
+    setFilteredProducts(sortedProducts);
   };
 
   return (

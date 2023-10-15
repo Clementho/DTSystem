@@ -46,8 +46,6 @@ escrow_contract_instance = w3.eth.contract(address=ESCROW_CONTRACT_ADDRESS, abi=
 # Route to handle an asset purchase request
 @router.post("/handlePurchase/{asset_id}")
 async def handleAssetPurchase(asset_id: int, purchaseData: PurchaseData):
-    print(purchaseData)
-    print(asset_id)
     try:
         # Unpack contents here just for easier readability
         asset_id = int(asset_id)
