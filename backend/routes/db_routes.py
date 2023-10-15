@@ -24,6 +24,11 @@ class PropertyWithCategory(BaseModel):
     propertyRarity: float
     propertyCatName: str
 
+
+class AssetOwner(BaseModel):
+    ownerAddress: str
+
+
 def get_db():
     db = SessionLocal()
     try:
@@ -94,6 +99,50 @@ def get_all_assets(db: Session = Depends(get_db)):
 
     return asset_list
 
+
+# Get all assets owned by a particular account
+@router.get("/get_assets_by_owner/{owner_address}")
+def get_assets_by_owner(owner_address: str, db: Session = Depends(get_db)):
+    # Query assets owned by the specified owner
+    assets = db.query(Asset).filter(Asset.ownerAddress == owner_address).all()
+
+    if not assets:
+        raise HTTPException(status_code=404, detail="No assets found for the provided owner address")
+
+    # Process the assets to resolve property categories and collection names
+    owned_assets = []
+    for asset in assets:
+        asset_properties = db.query(AssetProperty).filter(AssetProperty.assetID == asset.assetID).all()
+        property_ids = [ap.propertyID for ap in asset_properties]
+        properties = db.query(Property).filter(Property.propertyID.in_(property_ids)).all()
+
+        # Resolve property categories for the asset
+        property_info_list = []
+        for property in properties:
+            property_category = db.query(PropertyCategory).filter(PropertyCategory.propertyCatID == property.propertyCatID).first()
+            property_info = PropertyWithCategory(
+                propertyID=property.propertyID,
+                propertyName=property.propertyName,
+                propertyRarity=property.propertyRarity,
+                propertyCatName=property_category.propertyCatName
+            )
+            property_info_list.append(property_info)
+
+        asset_info = {
+            "assetID": asset.assetID,
+            "assetName": asset.assetName,
+            "assetDescription": asset.assetDescription,
+            "assetPrice": asset.assetPrice,
+            "ownerAddress": asset.ownerAddress,
+            "creatorAddress": asset.creatorAddress,
+            "collectionName": asset.collection.collectionName,
+            "properties": property_info_list
+        }
+        owned_assets.append(asset_info)
+
+    return owned_assets
+
+
 # GET all properties grouped by category
 @router.get("/get_all_properties_grouped")
 def get_all_properties_grouped(db: Session = Depends(get_db)):
@@ -152,14 +201,14 @@ def get_properties_for_asset(asset_id: int = Path(...), db: Session = Depends(ge
 
 # Update asset owner address
 @router.put("/update_asset_owner/{asset_id}")
-async def update_asset_owner(asset_id: int, new_asset_owner: str, db: Session = Depends(get_db)):
+async def update_asset_owner(asset_id: int, newOwner: AssetOwner, db: Session = Depends(get_db)):
     # Retrieve the asset to update
     asset = db.query(Asset).filter(Asset.assetID == asset_id).first()
     if asset is None:
         raise HTTPException(status_code=404, detail="Asset not found")
 
     # Update the ownerAddress attribute of the asset
-    asset.ownerAddress = new_asset_owner
+    asset.ownerAddress = newOwner.ownerAddress
 
     # Commit the changes to the database
     db.commit()

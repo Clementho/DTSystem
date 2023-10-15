@@ -63,6 +63,20 @@ async def readUser(user_address: str):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+# Route to get the user's balance
+@router.get("/getUserBalance/{user_address}")
+async def getUserBalance(user_address: str):
+    try:
+        balance_wei = w3.eth.get_balance(user_address)
+        balance_eth = w3.from_wei(balance_wei, "ether")
+
+        return {"user_address": user_address, "balance_wei": balance_wei, "balance_eth": balance_eth}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # Route to update user info
 @router.post("/updateUserInfo/{user_address}")

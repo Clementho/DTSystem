@@ -4,81 +4,57 @@ import ActivityTable from '../components/ActivityTable';
 import { Grid, Box, Avatar, Typography } from '@mui/material';
 import SectionTabs from '../components/SectionTabs';
 import ProductTile from '../components/ProductTile';
-import CollapsedFilterBar from '../components/CollapsedFilterBar';
-import ExpandedFilterBar from '../components/ExpandedFilterBar';
-import SearchBar from "../components/SearchBar";
-import SortOptionsBar from "../components/SortOptionsBar";
 
 import ShareIcon from '@mui/icons-material/Share';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 import { useGetProfile } from "../hooks/useGetProfile";
 import { useGetTransactions } from "../hooks/useGetTransactions";
-
-import products from "../data/products.json"
+import { useGetOwnedAssets } from "../hooks/useGetOwnedAssets";
 
 const User = () =>  {
   const { fetchProfile, profileData, getProfileError, isFetching } = useGetProfile();
   const { tranxData, getTranxError, isFetchingTranx } = useGetTransactions();
+  const { ownedAssets, fetchOwnedAssets, getOwnedAssetsError, isFetchingOwnedAssets } = useGetOwnedAssets();
   const [tranxRows, setTranxRows] = useState([]);
-  const [expandFilter, setExpandFilter] = useState(false);
 
-      useEffect(() => {
-        const rows = [];
-    
-        if(tranxData) { 
-    
-          tranxData.map((transaction) => {
-            const row = {
-              id: transaction.tradeID,
-              profileImg: 'resources/profile-image.png',
-              action: "Sale",
-              assetName: transaction.assetName,
-              initiator: transaction.buyer,
-              receiver: transaction.seller,
-              time: transaction.purchasedTime,
-              amount: transaction.assetPrice,
-            }
-    
-            rows.push(row)
-          })
-        }
-    
-        setTranxRows(rows);
+    useEffect(() => {
+      const rows = [];
+      if(tranxData) { 
+  
+        tranxData.map((transaction) => {
+          const row = {
+            id: transaction.tradeID,
+            profileImg: 'resources/profile-image.png',
+            action: "Sale",
+            assetName: transaction.assetName,
+            initiator: transaction.buyer,
+            receiver: transaction.seller,
+            time: transaction.purchasedTime,
+            amount: transaction.assetPrice,
+          }
+  
+          rows.push(row)
+        })
+      }
+  
+      setTranxRows(rows);
     
     }, [tranxData]);
 
-    // Fetch user profile details on mount
+    // Fetch user profile details & owned assets on mount
     useEffect(() => {
       fetchProfile("0x780B021bc49E53a475b9Bf2b0D8817008BfE0468");
+      fetchOwnedAssets("0x780B021bc49E53a475b9Bf2b0D8817008BfE0468");
     }, []);
-      
 
   const UserItems = () => (
     <Box sx={{flexGrow: 1, width: "100%", margin: "auto", display: "flex", columnGap: "20px"}}> 
     
-      { expandFilter && <ExpandedFilterBar expandFilter={expandFilter} setExpandFilter={setExpandFilter}/> }
-
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 9, md: 12, lg: 20 }}>
-        
-          <Grid item xs={4} sm={9} md={12} lg={20}>
-            <Box 
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-start"
-              sx={{
-                marginLeft: expandFilter ? "-20px" : 0
-              }}
-            >
-              { !expandFilter && <CollapsedFilterBar setExpandFilter={setExpandFilter}/> }
-              <SearchBar placeholder="Search..."/>
-              <SortOptionsBar />
-            </Box>
-          </Grid>
-
-          {products.map((product, index) => (
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12, lg: 20 }}>
+          {ownedAssets.map((product, index) => (
              // Dynamically adjust each product tile's size within the grid system if filter bar is expanded/collapsed
-             <Grid item xs={2} sm={3} lg={ expandFilter ? 5 : 4 } key={index}> 
+             <Grid item xs={2} md={4} lg={5} key={index}> 
               <ProductTile key={product.id} product={product} />
             </Grid>
           ))}

@@ -12,7 +12,7 @@ import axios from "axios";
 const Marketplace = () => {
   const [expandFilter, setExpandFilter] = useState(false);
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]); // Add filteredProducts state
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filtersApplied, setFiltersApplied] = useState(false);
 
@@ -149,7 +149,7 @@ const Marketplace = () => {
                 <CollapsedFilterBar setExpandFilter={setExpandFilter} filtersApplied={filtersApplied} />
               )}
               <AssetSearchBar type="text" placeholder="Search NFTs..." onSearch={handleSearch}/>
-              <SortOptionsBar products={products} setFilteredProducts={setFilteredProducts} />
+              <SortOptionsBar products={filteredProducts || products} setFilteredProducts={setFilteredProducts} />
             </Box>
           </Grid>
 

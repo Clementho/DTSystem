@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 export default function ProductTile({product}) {
 
   //TODO: Clean this up when making the backend
-  const imageDir = `/resources/asset-1.jpg`;
+  const imageDir = `/resources/asset-${product.assetID % 10 + 1}.jpg`;
 
   return (
     <NavLink to={`/marketplace/${product.assetID}`} style={{ textDecoration: "none" }}>

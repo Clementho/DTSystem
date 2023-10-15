@@ -39,7 +39,7 @@ export default function ProductOverview({description, creator, owner}) {
                     textOverflow: 'ellipsis',
                     maxWidth: "25vw",
                   }}
-                >{creator}</Typography>
+                >{owner}</Typography>
             </Box>
         </Grid>
       </Grid>

@@ -16,7 +16,7 @@ user_contract_instance = w3.eth.contract(address=USERACCOUNT_CONTRACT_ADDRESS, a
 
 users_to_register = [
     {
-        "name": "SeltradeX", 
+        "name": "@SeltradeX", 
         "email": "seltradeX@gmail.com", 
         "biography": "Hey there, I'm Max – your friendly neighborhood NFT and crypto explorer! Join me on my exhilarating journey through the NFT cosmos and the crypto universe – where pixels meet prosperity, and innovation knows no bounds.", 
         "address": MAIN_USER_ADDRESS 

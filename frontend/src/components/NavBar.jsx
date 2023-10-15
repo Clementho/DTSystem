@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SnackBar from "./SnackBar";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 // Navigation Bar Component
 // Adapted from https://mui.com/material-ui/react-app-bar/
@@ -21,12 +23,13 @@ import SearchBar from "./SearchBar";
 const pages = ["Marketplace"];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [walletBalance, setWalletBalance] = useState(0);
 
   // Snackbar states
-  const [snackMessage, setSnackMessage] = React.useState("");
-  const [snackSeverity, setSnackSeverity] = React.useState("");
+  const [snackMessage, setSnackMessage] = useState("");
+  const [snackSeverity, setSnackSeverity] = useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +41,24 @@ function ResponsiveAppBar() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  // Function to fetch the user's balance
+  const fetchUserBalance = async () => {
+    try {
+      const response = await axios.get("/api/user/getUserBalance/0x780B021bc49E53a475b9Bf2b0D8817008BfE0468");
+      const roundedBalance = parseFloat(response.data.balance_eth).toFixed(2); // Round to 2 decimal places
+
+      setWalletBalance(roundedBalance);
+      
+    } catch (error) {
+      console.error("Error fetching user balance:", error);
+      setWalletBalance(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserBalance();
+  }, []);
 
   return (
     <AppBar
@@ -130,12 +151,27 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ 
+            flexGrow: 0, 
+            display: "flex",
+            alignItems: "center", 
+            justifyContent: "space-between",
+            borderRadius: "50px",
+            padding: "7px 7px 7px 30px",
+            bgcolor: "#401780",
+          }}>
+            <Typography sx={{
+              fontSize: "1.4em",
+              fontWeight: "bold",
+              marginRight: "20px",
+            }}>
+              {walletBalance}
+            </Typography>
             <Tooltip title="Profile">
               {/* Routes to user profile */}
               <NavLink to={"/User"} style={{ textDecoration: "none" }}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src="/resources/profile-image.png" />
+                  <Avatar src="/resources/profile-image.png" sx={{ width: 56, height: 56 }}/>
                 </IconButton>
               </NavLink>
             </Tooltip>

@@ -10,7 +10,6 @@ import Select from '@mui/material/Select';
 const sortOptions = [
     "Price (Low to High)",
     "Price (High to Low)",
-    
 ]
 
 const ITEM_HEIGHT = 48;
@@ -40,7 +39,6 @@ export default function SortOptionsBar({ products, setFilteredProducts }) {
     } else if (selectedOption === "Price (High to Low)") {
       sortedProducts.sort((a, b) => b.assetPrice - a.assetPrice);
     }
-
     // Update the filtered products with the sorted products
     setFilteredProducts(sortedProducts);
   };

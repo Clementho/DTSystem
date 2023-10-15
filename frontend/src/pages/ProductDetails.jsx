@@ -6,6 +6,7 @@ import ProductOverview from "../components/ProductOverview";
 import Properties from "../components/Properties";
 import ActivityTable from "../components/ActivityTable";
 import SnackBar from "../components/SnackBar";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import axios from "axios";
 
 import { useBuyAsset } from "../hooks/useBuyAsset";
@@ -67,9 +68,7 @@ useEffect(() => {
 }, [id]);
 
 
-//TODO: Clean this up when making the backend
-const imageDir = `/resources/asset-${id}.jpg`;
-
+const imageDir = `/resources/asset-${id % 10 + 1}.jpg`;
 
   const handlePurchase = async () => {
     setSnackMessage("");
@@ -96,11 +95,10 @@ const imageDir = `/resources/asset-${id}.jpg`;
     } else if (purchaseSuccess) {
 
       async function updateAsset() {
-        const new_asset_owner = "0x780B021bc49E53a475b9Bf2b0D8817008BfE0468"
         
         try {
           // Make an API request to update the asset in the database
-          await axios.put(`/api/db/update_asset_owner/${id}`, new_asset_owner);
+          await axios.put(`/api/db/update_asset_owner/${id}`, { ownerAddress: "0x780B021bc49E53a475b9Bf2b0D8817008BfE0468" });
 
           setSnackMessage("Purchase has been made successfully!");
           setSnackSeverity("success");
@@ -215,15 +213,16 @@ const imageDir = `/resources/asset-${id}.jpg`;
               </Typography>
             </Grid>
 
-            <Grid item
-              sx={{
-                display: "flex",
-                padding: "5px 0px",
-                alignItems: "center",
-                justifyContent: "space-evenly",
-                marginTop: "10px"
-              }}
-            >
+            {product.ownerAddress !== "0x780B021bc49E53a475b9Bf2b0D8817008BfE0468" ? (
+              <Grid item
+                sx={{
+                  display: "flex",
+                  padding: "5px 0px",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  marginTop: "10px"
+                }}
+              >
                 <Button
                   variant="contained"
                   onClick={handlePurchase}
@@ -256,7 +255,37 @@ const imageDir = `/resources/asset-${id}.jpg`;
                 >
                   Make Offer
                 </Button>
-            </Grid>
+              </Grid>
+            ) : (
+              <Grid item
+                sx={{
+                  display: "flex",
+                  padding: "5px 0px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "10px"
+                }}
+              >
+                <CheckCircleIcon 
+                  sx={{
+                    color: "#00C648",
+                    width: "30px",
+                    height: "30px",
+                    marginRight: "6px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "1.5em",
+                    fontWeight: "bold",
+                    color: "#00C648"
+                  }}
+                >
+                  Owned
+                </Typography>
+              </Grid>
+            )}
+
           </Box>
         </Grid>
 

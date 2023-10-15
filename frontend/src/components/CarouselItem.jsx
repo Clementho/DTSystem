@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 // Adapted from https://github.com/harakisgeorge/carouselreact\
 
 export default function CarouselItem({product}) {
-  //TODO: Clean this up when making the backend
-  const imageDir = `/resources/asset-2.jpg`;
+  console.log(product)
+  const imageDir = `/resources/asset-${product.assetID % 10 + 1}.jpg`;
   const navigate = useNavigate();
 
   const handleClick = () => {
