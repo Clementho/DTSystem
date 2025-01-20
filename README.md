@@ -19,6 +19,8 @@ This project is developed for **learning purposes only** and serves as a simulat
 ### SQL Database Setup
 An existing SQL dump file can be found in `backend/db_setup/dtsystem_db.sql`.
 
+<br/>
+
 ### Ganache Ethereum Workspace Setup
 This section specifies how to setup a local Ganache Ethereum workspace:
 1. Open the file `backend/config/blockchain_network_config.py` & copy the contents of **GANACHE_MNEMONIC**
@@ -27,6 +29,8 @@ This section specifies how to setup a local Ganache Ethereum workspace:
 4. Click `Start` to finish creating the Ethereum workspace.
 
 **Note:** The guide above is intended for users who are new to Ganache and setting up local Ethereum workspaces. The **MNEMONIC** is a series of unique keywords used to recreate the exact blockchain environment used during the project's development. If you are already familiar with using Ganache and configuring Ethereum workspaces, feel free to follow your own setup process.
+
+<br/>
 
 ### Smart Contract Build & Deployment
 This section specifies how to setup the application’s Python backend, build and deploy smart contracts, and perform any remaining initialization steps onto the local Ethereum blockchain by executing the respective python scripts.
@@ -46,31 +50,35 @@ This section specifies how to setup the application’s Python backend, build an
     ```
 
 4. Once the script finishes the deployment, it will output the smart contract’s addresses on the local Ethereum blockchain. Copy each address and replace the following constant variables in `backend/config/blockchain_address_config.py`:
-    a. `ASSETPURCHASE_CONTRACT_ADDRESS`
-    b. `ESCROW_CONTRACT_ADDRESS`
-    c. `USERACCOUNT_CONTRACT_ADDRESS`
+    * `ASSETPURCHASE_CONTRACT_ADDRESS`
+    * `ESCROW_CONTRACT_ADDRESS`
+    * `USERACCOUNT_CONTRACT_ADDRESS`
+
+<br/>
 
 ### Application Accounts Setup
 1. Two user accounts will be created for the purpose of simulating transactions on the platform. To create them, execute the following script from the terminal:
     ```bash
     $ python init_users.py
     ```
+<br/>
 
 ### React Frontend Setup
 1. Navigate to `frontend` & install the application's React frontend NPM packages:
     ```bash
-        $ npm install
+    $ npm install
     ```
+<br/>
 
 ## Usage Guide
 1. Open up 2 terminal/console windows, each in the `frontend` and `backend` directories respectively:
 2. To start the Python backend server:
     ```bash
-        $ uvicorn main:app --reload
+    $ uvicorn main:app --reload
     ```
 3. To start the React frontend:
     ```bash
-        $ npm start
+    $ npm start
     ```
 
 ## Languages, Libraries & Frameworks
