@@ -10,6 +10,10 @@ This project is developed for **learning purposes only** and serves as a simulat
 ## Tools & Services
 <img src="https://skillicons.dev/icons?i=ai,ps,xd,anaconda,mysql&perline=10" alt="Tools and Services" />
 
+## Design & Prototyping
+The initial UI/UX design for HyperETH was created in Adobe XD. You can view the design prototype here:  
+[🔗 View Adobe XD Prototype](https://xd.adobe.com/view/2211c85e-4f93-4a8b-9b69-dd05ba73a74f-7742/)
+
 ## Key Features & Modules
 * **Asset Discovery**: Easily browse and view digital assets available for trading. This feature simplifies asset exploration, making it convenient for users to find items of interest.
 * **Search and Filter Functionality**: Robust search and filter options allow users to pinpoint specific assets based on preferences, enhancing the overall user experience.
