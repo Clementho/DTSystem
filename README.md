@@ -4,6 +4,12 @@ HyperETH is a decentralized trading platform designed to transform the peer-to-p
 
 This project is developed for **learning purposes only** and serves as a simulation of real-world blockchain transactions. All Ethereum blockchain configurations and transaction accounts are hardcoded to replicate blockchain functionality in a controlled environment.
 
+## Languages, Libraries & Frameworks
+<img src="https://skillicons.dev/icons?i=html,css,js,react,tailwind,materialui,py,fastapi,solidity&perline=10" alt="Languages, Libraries and Frameworks" />
+
+## Tools & Services
+<img src="https://skillicons.dev/icons?i=ai,ps,xd,anaconda,mysql&perline=10" alt="Tools and Services" />
+
 ## Key Features & Modules
 * **Asset Discovery**: Easily browse and view digital assets available for trading. This feature simplifies asset exploration, making it convenient for users to find items of interest.
 * **Search and Filter Functionality**: Robust search and filter options allow users to pinpoint specific assets based on preferences, enhancing the overall user experience.
@@ -80,12 +86,6 @@ This section specifies how to setup the application’s Python backend, build an
     ```bash
     $ npm start
     ```
-
-## Languages, Libraries & Frameworks
-<img src="https://skillicons.dev/icons?i=html,css,js,react,tailwind,materialui,py,fastapi,solidity&perline=10" alt="Languages, Libraries and Frameworks" />
-
-## Tools & Services
-<img src="https://skillicons.dev/icons?i=ai,ps,xd,anaconda,mysql&perline=10" alt="Tools and Services" />
 
 ## Disclaimer
 This project is a prototype for educational purposes only. It does not implement a payment gateway, and no real funds or assets are exchanged on the platform. All asset listings and transactions are mock implementations and do not reflect actual NFTs or real-world marketplaces.
